@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+    proxy:
+        build: ./nginx
+        ports:
+            - '334:80'
+        depends_on:
+            - frontend
+            - backend
+
+    backend:
+        build: ./server
+        expose:
+            - 8000
+        environment:
+            - HOST=0.0.0.0
+            - PORT=8000
+            - ENV=production
+        depends_on:
+            - db
+
+    frontend:
+        build: ./client
+        expose:
+            - 3000
+        depends_on:
+            - backend
+    db:
+        image: mysql:9.0.1
+        ports:
+            - '8989:3306'
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=app
+            - MYSQL_USER=user
+            - MYSQL_PASSWORD=password
