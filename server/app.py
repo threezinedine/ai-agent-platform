@@ -2,16 +2,24 @@ from typing import *
 from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
+from contextlib import asynccontextmanager
+from databases.db_tools import create_db_and_tables
 
 load_dotenv()
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables()
+    yield
 
 
-@app.get("/api")
-def read_root():
-    return {"Hello": "World"}
+app = FastAPI(lifespan=lifespan)
 
+
+from apis.v1.users import router as users_router
+
+app.include_router(users_router)
 
 if __name__ == "__main__":
     import uvicorn
