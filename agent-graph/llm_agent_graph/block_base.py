@@ -1,0 +1,2 @@
+class BlockBase:
+    pass
