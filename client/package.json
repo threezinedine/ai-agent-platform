@@ -12,6 +12,8 @@
 		"test:e2e": "cypress open"
 	},
 	"dependencies": {
+		"gojs": "^3.0.18",
+		"gojs-react": "^1.1.2",
 		"next": "15.1.6",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
