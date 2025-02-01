@@ -6,5 +6,5 @@ class IntInputBlock(BlockBase):
     pass
 
 
-def initialize_block():
+def initialize_block() -> None:
     Node.RegisterBlock("int-input", IntInputBlock)

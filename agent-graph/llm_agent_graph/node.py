@@ -1,5 +1,7 @@
 from typing import *
 from .block_base import BlockBase
+import importlib
+import os
 
 
 class Node:
@@ -27,6 +29,8 @@ class Node:
     graph.Execute({"test-input": 10}) # Output: 10
     ```
     """
+
+    blocks: Dict[str, Type[BlockBase]] = {}  # Mapping of block name to block class
 
     def __init__(
         self,
@@ -58,11 +62,18 @@ class Node:
         """
         Load all the plugins from the given directories.
         """
-        pass
+        for block_dir in block_dirs:
+            for file in os.listdir(block_dir):
+                if file.endswith(".py") and file != "__init__.py":
+                    module = importlib.import_module(f"{block_dir}.{file[:-3]}")
+                    module.initialize_block()
 
     @staticmethod
     def RegisterBlock(name: str, block: Type[BlockBase]) -> None:
-        pass
+        """
+        Register a block with the given name.
+        """
+        Node.blocks[name] = block
 
 
 if __name__ == "__main__":
