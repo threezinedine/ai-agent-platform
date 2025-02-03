@@ -21,7 +21,7 @@
 
 ### Prerequisites
 
--   Python 3.11 or higher (can be installed from [here](https://www.python.org/downloads/))
+-   Python 3.10 or higher (can be installed from [here](https://www.python.org/downloads/))
 -   Virtual Environment (can be installed using `pip install virtualenv`)
 
 ### Setting Up the Backend
