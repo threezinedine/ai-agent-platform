@@ -80,3 +80,5 @@ jobs:
 
             - name: Run tests
               uses: cypress-io/github-action@v6
+              with:
+                  working-directory: client
