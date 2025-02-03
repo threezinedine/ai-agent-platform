@@ -16,6 +16,7 @@
         -   [Testing the Frontend Server](#testing-the-frontend-server)
     -   [End-to-End Testing](#end-to-end-testing)
     -   [Code Formatting and Linting](#code-formatting-and-linting)
+    -   [Storybook](#storybook)
 
 ## Backend
 
@@ -129,3 +130,12 @@ Ensure your code follows the formatting and linting guidelines:
     ```sh
     npm run lint
     ```
+
+## Storybook
+
+For running storybook, run the following command:
+
+```sh
+cd frontend
+npm run storybook
+```
