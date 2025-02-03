@@ -76,7 +76,7 @@ jobs:
 
             - name: Run Project
               run: |
-                  docker-compose up -d
+                  docker compose up -d
 
             - name: Run tests
               uses: cypress-io/github-action@v6
