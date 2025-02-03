@@ -6,7 +6,7 @@ on:
             - main
 
 jobs:
-    test:
+    test-backend:
         runs-on: ubuntu-latest
 
         steps:
@@ -37,3 +37,25 @@ jobs:
               run: |
                   cd server
                   venv/bin/python -m pytest
+
+    test-frontend:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: |
+                  cd client
+                  npm install
+
+            - name: Run tests
+              run: |
+                  cd client
+                  npm run test
