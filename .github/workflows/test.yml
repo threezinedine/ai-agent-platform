@@ -54,7 +54,26 @@ jobs:
                   cd client
                   npm install
 
+            - name: Run Lint
+              run: |
+                  cd client
+                  npm run lint
+
             - name: Run tests
               run: |
                   cd client
                   npm run test
+
+    e2e-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Run Project
+              run: |
+                  docker-compose up -d
+
+            - name: Run tests
+              uses: cypress-io/github-action@v6
