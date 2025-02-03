@@ -1,5 +1,11 @@
 # AI Agent Platform
 
+![Test Status](https://github.com/threezinedine/ai-agent-platform/actions/workflows/test.yml/badge.svg)
+![GitHub issues](https://img.shields.io/github/issues/threezinedine/ai-agent-platform.svg)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/threezinedine/ai-agent-platform.svg)
+![License](https://img.shields.io/github/license/threezinedine/ai-agent-platform.svg)
+![GitHub stars](https://img.shields.io/github/stars/threezinedine/ai-agent-platform.svg)
+
 This project is divided into two main parts:
 
 1. **Backend**: Handles the logic of the large language model (LLM), processes input, manages model operations, and returns output.
@@ -9,14 +15,14 @@ This platform aims to streamline the development and deployment of AI agents by 
 
 ## Table of Contents
 
-- [AI Agent Platform](#ai-agent-platform)
-  - [Table of Contents](#table-of-contents)
-  - [Build Docker Image](#build-docker-image)
-    - [Prerequisites](#prerequisites)
-    - [Steps](#steps)
-    - [Remarks:](#remarks)
-  - [Development Instructions](#development-instructions)
-  - [Contact Us](#contact-us)
+-   [AI Agent Platform](#ai-agent-platform)
+    -   [Table of Contents](#table-of-contents)
+    -   [Build Docker Image](#build-docker-image)
+        -   [Prerequisites](#prerequisites)
+        -   [Steps](#steps)
+        -   [Remarks:](#remarks)
+    -   [Development Instructions](#development-instructions)
+    -   [Contact Us](#contact-us)
 
 ## Build Docker Image
 
