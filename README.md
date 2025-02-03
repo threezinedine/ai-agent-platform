@@ -6,6 +6,8 @@
 ![License](https://img.shields.io/github/license/threezinedine/ai-agent-platform.svg)
 ![GitHub stars](https://img.shields.io/github/stars/threezinedine/ai-agent-platform.svg)
 
+---
+
 This project is divided into two main parts:
 
 1. **Backend**: Handles the logic of the large language model (LLM), processes input, manages model operations, and returns output.
