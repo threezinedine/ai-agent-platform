@@ -18,3 +18,6 @@ class User(SQLModel, table=True):
             username=user_info.username,
             hashed_password=hash_password(user_info.password),
         )
+
+    def CheckPassword(self, password: str) -> bool:
+        return verify_password(password, self.hashed_password)
