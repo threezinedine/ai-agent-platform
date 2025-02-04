@@ -1,12 +1,14 @@
+from typing import *
 from pydantic import BaseModel
 
 
-class User(BaseModel):
+class UserInfo(BaseModel):
+    id: int
     username: str
-    email: str
-    full_name: str = None
+    email: Optional[str] = None
+    full_name: Optional[str] = None
 
 
-class UserLogin(BaseModel):
+class UserLoginInfo(BaseModel):
     username: str
     password: str

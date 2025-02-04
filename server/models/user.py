@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field
 from datetime import datetime
-from schemas import UserLogin
+from schemas import *
 from utils import *
 
 
@@ -13,7 +13,7 @@ class User(SQLModel, table=True):
     created_at: datetime = Field(default=datetime.now())
 
     @staticmethod
-    def CreateFromInfo(user_info: UserLogin) -> "User":
+    def CreateFromInfo(user_info: UserLoginInfo) -> "User":
         return User(
             username=user_info.username,
             hashed_password=hash_password(user_info.password),

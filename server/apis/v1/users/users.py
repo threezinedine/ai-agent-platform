@@ -10,9 +10,9 @@ router = APIRouter(prefix="/api/v1/users", tags=["users", "authenticate"])
 
 @router.post("/register")
 def register_new_user(
-    user_info: UserLogin,
+    user_info: UserLoginInfo,
     session: SessionDependency,
-) -> User:
+) -> UserInfo:
     user = User.CreateFromInfo(user_info)
     session.add(user)
     session.commit()
@@ -22,9 +22,9 @@ def register_new_user(
 
 @router.post("/login")
 def login_user(
-    user_info: UserLogin,
+    user_info: UserLoginInfo,
     session: SessionDependency,
-) -> User:
+) -> UserInfo:
     user = session.exec(select(User).where(User.username == user_info.username)).first()
 
     if not user:
@@ -39,4 +39,4 @@ def login_user(
             detail="Invalid password",
         )
 
-    return User(username=user_info.username)
+    return user
