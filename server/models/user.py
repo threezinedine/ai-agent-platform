@@ -8,6 +8,7 @@ class User(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
     username: str = Field(unique=True, index=True)
     email: str = Field(unique=False, nullable=True)
+    full_name: str = Field(nullable=True)
     hashed_password: str = Field(max_length=100)
     verified: bool = Field(default=False)
     created_at: datetime = Field(default=datetime.now())

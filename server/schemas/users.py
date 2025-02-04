@@ -9,6 +9,11 @@ class UserInfo(BaseModel):
     full_name: Optional[str] = None
 
 
+class LoginResponse(BaseModel):
+    token: str
+    user: UserInfo
+
+
 class UserLoginInfo(BaseModel):
     username: str
     password: str

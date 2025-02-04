@@ -4,6 +4,8 @@ from schemas.users import *
 from models import *
 from sqlmodel import select
 from constants import *
+from .get_user_depend import ScopeDependency
+from utils import *
 
 router = APIRouter(prefix="/api/v1/users", tags=["users", "authenticate"])
 
@@ -24,7 +26,7 @@ def register_new_user(
 def login_user(
     user_info: UserLoginInfo,
     session: SessionDependency,
-) -> UserInfo:
+) -> LoginResponse:
     user = session.exec(select(User).where(User.username == user_info.username)).first()
 
     if not user:
@@ -39,4 +41,24 @@ def login_user(
             detail="Invalid password",
         )
 
+    return LoginResponse(
+        token=generate_token(
+            TokenGeneratorData(
+                user.username,
+                password=user.hashed_password,
+            )
+        ),
+        user=UserInfo(
+            id=user.id,
+            username=user.username,
+            email=user.email,
+            full_name=user.full_name,
+        ),
+    )
+
+
+@router.get("/me")
+def get_user_info(
+    user: User = ScopeDependency,
+) -> UserInfo:
     return user

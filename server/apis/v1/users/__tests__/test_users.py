@@ -55,10 +55,15 @@ class UserTest(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, HTTP_200_OK)
+
         response_json = response.json()
-        self.assertEqual(response_json["username"], username)
-        self.assertTrue("id" in response_json)
-        self.assertTrue("password" not in response_json)
+        self.assertTrue("token" in response_json)
+        self.assertTrue("user" in response_json)
+
+        user_info = response_json["user"]
+        self.assertEqual(user_info["username"], username)
+        self.assertTrue("id" in user_info)
+        self.assertTrue("password" not in user_info)
 
     def test_login_non_existent_user(self) -> None:
         response = self.client.post(
@@ -92,3 +97,45 @@ class UserTest(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
+
+    def test_get_user_info_with_no_token(self) -> None:
+        response = self.client.get("/api/v1/users/me")
+
+        self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
+
+    def test_get_user_info_with_invalid_token(self) -> None:
+        response = self.client.get(
+            "/api/v1/users/me",
+            headers={"Authorization": "Bearer invalid-token"},
+        )
+
+        self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
+
+    def test_get_user_info_with_valid_token(self) -> None:
+        username = "test-get-user-info-username"
+        password = "test-get-user-info-password"
+
+        self.client.post(
+            "/api/v1/users/register",
+            json={
+                "username": username,
+                "password": password,
+            },
+        )
+
+        response = self.client.post(
+            "/api/v1/users/login",
+            json={
+                "username": username,
+                "password": password,
+            },
+        )
+
+        token = response.json()["token"]
+
+        response = self.client.get(
+            "/api/v1/users/me",
+            headers={"Authorization": token},
+        )
+
+        self.assertEqual(response.status_code, HTTP_200_OK)
