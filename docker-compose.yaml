@@ -17,6 +17,7 @@ services:
             - HOST=0.0.0.0
             - PORT=8000
             - ENV=production
+            - AVATAR_FOLDER_DIR=/app/avatars
         depends_on:
             - db
 
