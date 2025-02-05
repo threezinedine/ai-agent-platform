@@ -139,3 +139,88 @@ class UserTest(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, HTTP_200_OK)
+
+    def test_update_user_info_with_no_token(self) -> None:
+        username = "test-update-username-with-no-token"
+        password = "test-update-password-with-no-token"
+
+        self.client.post(
+            "/api/v1/users/register",
+            json={
+                "username": username,
+                "password": password,
+            },
+        )
+
+        response = self.client.put("/api/v1/users/me")
+
+        self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
+
+    def test_update_user_info_with_valid_token(self) -> None:
+        username = "test-update-username-with-valid-token"
+        password = "test-update-password-with-valid-token"
+        new_full_name = "Test Update With Valid Token"
+        new_email = "test-update-with-valid-token@gmail.com"
+
+        self.client.post(
+            "/api/v1/users/register",
+            json={
+                "username": username,
+                "password": password,
+            },
+        )
+
+        token = self.client.post(
+            "/api/v1/users/login",
+            json={
+                "username": username,
+                "password": password,
+            },
+        ).json()["token"]
+
+        response = self.client.put(
+            "/api/v1/users/me",
+            json={
+                "username": "fake-username",
+                "password": password,
+                "full_name": new_full_name,
+                "email": new_email,
+            },
+            headers={"Authorization": token},
+        )
+
+        self.assertEqual(response.status_code, HTTP_200_OK)
+
+        response_json = response.json()
+        self.assertEqual(response_json["full_name"], new_full_name)
+        self.assertEqual(response_json["email"], new_email)
+        self.assertEqual(response_json["username"], username)
+        self.assertTrue("id" in response_json)
+
+    def test_user_get_avatar(self) -> None:
+        username = "test-get-avatar-username"
+        password = "test-get-avatar-password"
+
+        self.client.post(
+            "/api/v1/users/register",
+            json={
+                "username": username,
+                "password": password,
+            },
+        )
+
+        token = self.client.post(
+            "/api/v1/users/login",
+            json={
+                "username": username,
+                "password": password,
+            },
+        ).json()["token"]
+
+        response = self.client.get(
+            "/api/v1/users/avatar",
+            headers={"Authorization": token},
+        )
+
+        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertEqual(response.headers["Content-Type"], "image/png")

@@ -14,6 +14,11 @@ class LoginResponse(BaseModel):
     user: UserInfo
 
 
+class UpdateUserInfo(BaseModel):
+    full_name: Optional[str] = None
+    email: Optional[str] = None
+
+
 class UserLoginInfo(BaseModel):
     username: str
     password: str
