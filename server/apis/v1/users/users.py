@@ -7,6 +7,7 @@ from sqlmodel import select
 from constants import *
 from .get_user_depend import ScopeDependency
 from utils import *
+from dotenv import load_dotenv
 
 router = APIRouter(prefix="/api/v1/users", tags=["users", "authenticate"])
 

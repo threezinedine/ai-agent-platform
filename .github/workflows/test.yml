@@ -27,6 +27,11 @@ jobs:
                   cd server
                   python -m venv venv
 
+            - name: Setup env
+              run: |
+                  cd server
+                  mv .env.example .env
+
             - name: Install dependencies
               run: |
                   cd server
