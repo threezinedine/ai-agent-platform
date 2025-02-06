@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 from databases import *
 from app import app
 from constants import *
+from .fixture import *
 
 
 class UserTest(unittest.TestCase):
@@ -115,23 +116,7 @@ class UserTest(unittest.TestCase):
         username = "test-get-user-info-username"
         password = "test-get-user-info-password"
 
-        self.client.post(
-            "/api/v1/users/register",
-            json={
-                "username": username,
-                "password": password,
-            },
-        )
-
-        response = self.client.post(
-            "/api/v1/users/login",
-            json={
-                "username": username,
-                "password": password,
-            },
-        )
-
-        token = response.json()["token"]
+        token = create_and_login_user(self.client, username, password)
 
         response = self.client.get(
             "/api/v1/users/me",
@@ -162,21 +147,7 @@ class UserTest(unittest.TestCase):
         new_full_name = "Test Update With Valid Token"
         new_email = "test-update-with-valid-token@gmail.com"
 
-        self.client.post(
-            "/api/v1/users/register",
-            json={
-                "username": username,
-                "password": password,
-            },
-        )
-
-        token = self.client.post(
-            "/api/v1/users/login",
-            json={
-                "username": username,
-                "password": password,
-            },
-        ).json()["token"]
+        token = create_and_login_user(self.client, username, password)
 
         response = self.client.put(
             "/api/v1/users/me",
@@ -201,21 +172,7 @@ class UserTest(unittest.TestCase):
         username = "test-get-avatar-username"
         password = "test-get-avatar-password"
 
-        self.client.post(
-            "/api/v1/users/register",
-            json={
-                "username": username,
-                "password": password,
-            },
-        )
-
-        token = self.client.post(
-            "/api/v1/users/login",
-            json={
-                "username": username,
-                "password": password,
-            },
-        ).json()["token"]
+        token = create_and_login_user(self.client, username, password)
 
         response = self.client.get(
             "/api/v1/users/avatar",
@@ -229,21 +186,7 @@ class UserTest(unittest.TestCase):
         username = "test-update-avatar-username"
         password = "test-update-avatar-password"
 
-        self.client.post(
-            "/api/v1/users/register",
-            json={
-                "username": username,
-                "password": password,
-            },
-        )
-
-        token = self.client.post(
-            "/api/v1/users/login",
-            json={
-                "username": username,
-                "password": password,
-            },
-        ).json()["token"]
+        token = create_and_login_user(self.client, username, password)
 
         with open("assets/test-ava.png", "rb") as f:
             content = f.read()
