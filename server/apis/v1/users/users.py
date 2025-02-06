@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
 from databases import *
 from schemas.users import *
@@ -110,3 +110,25 @@ def get_avatar(
         path = os.path.join(os.environ["AVATAR_FOLDER_DIR"], user.avatar_url)
 
     return FileResponse(path)
+
+
+@router.put("/avatar")
+def set_avatar(
+    session: SessionDependency,
+    avatar: UploadFile = File(...),
+    user: User = ScopeDependency,
+) -> str:
+    if user is None:
+        raise HTTPException(
+            status_code=HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+
+    avatar_url = f"{user.username}-{avatar.filename}-avatar.png"
+    with open(os.path.join(os.environ["AVATAR_FOLDER_DIR"], avatar_url), "wb") as f:
+        f.write(avatar.file.read())
+
+    user.avatar_url = avatar_url
+    session.commit()
+
+    return avatar.filename

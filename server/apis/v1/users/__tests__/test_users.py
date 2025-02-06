@@ -224,3 +224,43 @@ class UserTest(unittest.TestCase):
 
         self.assertEqual(response.status_code, HTTP_200_OK)
         self.assertEqual(response.headers["Content-Type"], "image/png")
+
+    def test_user_update_avatar(self) -> None:
+        username = "test-update-avatar-username"
+        password = "test-update-avatar-password"
+
+        self.client.post(
+            "/api/v1/users/register",
+            json={
+                "username": username,
+                "password": password,
+            },
+        )
+
+        token = self.client.post(
+            "/api/v1/users/login",
+            json={
+                "username": username,
+                "password": password,
+            },
+        ).json()["token"]
+
+        with open("assets/test-ava.png", "rb") as f:
+            content = f.read()
+            response = self.client.put(
+                "/api/v1/users/avatar",
+                files={"avatar": ("test.png", f, "image/png")},
+                headers={"Authorization": token},
+            )
+
+        self.assertEqual(response.status_code, HTTP_200_OK)
+
+        response = self.client.get(
+            "/api/v1/users/avatar",
+            headers={"Authorization": token},
+        )
+
+        self.assertEqual(response.status_code, HTTP_200_OK)
+        self.assertEqual(response.headers["Content-Type"], "image/png")
+
+        self.assertEqual(response.content, content)
