@@ -30,7 +30,7 @@ jobs:
             - name: Setup env
               run: |
                   cd server
-                  mv .env.example .env
+                  mv .test.env .env
 
             - name: Install dependencies
               run: |
