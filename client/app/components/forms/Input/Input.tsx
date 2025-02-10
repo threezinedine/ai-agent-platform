@@ -38,13 +38,22 @@ export default function Input({ title, dataTestId, validators }: InputProps) {
 	}
 
 	return (
-		<div>
-			<div>{title ? title : 'Input'}</div>
-			<input
-				data-testid={dataTestId}
-				onChange={onChange}
-			/>
-			{error && <div>{error}</div>}
+		<div className="w-full max-w-sm">
+			<label
+				className="block text-sm font-medium text-gray-700"
+				htmlFor={dataTestId}
+			>
+				{title ? title : 'Input'}
+			</label>
+			<div className="mt-1 relative">
+				<input
+					className="block w-full rounded-md border border-red-500 bg-white px-3 py-2 text-gray-900 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm outline-none"
+					id={dataTestId}
+					data-testid={dataTestId}
+					onChange={onChange}
+				/>
+			</div>
+			{error && <div className="mt-2 text-sm text-red-600">{error}</div>}
 		</div>
 	);
 }

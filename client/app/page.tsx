@@ -3,6 +3,7 @@
 import React from 'react';
 import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
+import Input from './components/forms/Input';
 
 function initDiagram(): go.Diagram {
 	const diagram = new go.Diagram({
@@ -48,6 +49,15 @@ export default function Home() {
 	return (
 		<div>
 			<span>Hello world</span>
+			<Input
+				dataTestId="test"
+				validators={[
+					{
+						validate: (value: string) => value.length > 0,
+						message: 'Value is required',
+					},
+				]}
+			/>
 			<ReactDiagram
 				initDiagram={initDiagram}
 				divClassName="diagram-component"

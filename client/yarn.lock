@@ -1641,6 +1641,13 @@
     "@storybook/global" "^5.0.0"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-styling-webpack@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@storybook/addon-styling-webpack/-/addon-styling-webpack-1.0.1.tgz"
+  integrity sha512-5n+SXPfMTc4m7sWaJWPWjoHYWc6/B111M2Ia55toQ3GV4ON4vVlTgH9FX+EgCkDticElj99HLTMDJkHRj2yvkg==
+  dependencies:
+    "@storybook/node-logger" "^8.0.0-alpha.10"
+
 "@storybook/addon-toolbars@8.5.3":
   version "8.5.3"
   resolved "https://registry.npmjs.org/@storybook/addon-toolbars/-/addon-toolbars-8.5.3.tgz"
@@ -1802,6 +1809,11 @@
     tsconfig-paths-webpack-plugin "^4.0.1"
   optionalDependencies:
     sharp "^0.33.3"
+
+"@storybook/node-logger@^8.0.0-alpha.10":
+  version "8.5.3"
+  resolved "https://registry.npmjs.org/@storybook/node-logger/-/node-logger-8.5.3.tgz"
+  integrity sha512-V9ZwL7SmXPtLB0uifr3c+HYm+nnEtGYrd5zw9zRF1NFm/3q71bo9++AqwTFW2hQjw711ZXosyw1A/UCt0MYA8g==
 
 "@storybook/preset-react-webpack@8.5.3":
   version "8.5.3"
@@ -3360,6 +3372,11 @@ cliui@^8.0.1:
     string-width "^4.2.0"
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
+
+clsx@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz"
+  integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
 
 co@^4.6.0:
   version "4.6.0"
