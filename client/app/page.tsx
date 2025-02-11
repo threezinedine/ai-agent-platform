@@ -3,7 +3,7 @@
 import React from 'react';
 import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
-import Input from './components/forms/Input';
+import Form from '@/app/components/Form';
 
 function initDiagram(): go.Diagram {
 	const diagram = new go.Diagram({
@@ -49,12 +49,21 @@ export default function Home() {
 	return (
 		<div>
 			<span>Hello world</span>
-			<Input
-				dataTestId="test"
-				validators={[
+			<Form
+				testId="test"
+				name="Test Form"
+				submitFunc={() => console.log('submit')}
+				inputs={[
 					{
-						validate: (value: string) => value.length > 0,
-						message: 'Value is required',
+						testId: 'test-input-1',
+						title: 'Test Input 1',
+						validators: [
+							{
+								validate: (value: string) => value.length > 5,
+								message:
+									'Input should be at least 5 characters long',
+							},
+						],
 					},
 				]}
 			/>

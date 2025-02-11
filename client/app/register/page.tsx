@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Input from '@/app/components/forms/Input/Input';
+import Input from '@/app/components/forms/Form/Input';
 
 export default function RegisterPage() {
 	return (
