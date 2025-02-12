@@ -7,6 +7,7 @@ interface InputProps {
 	title: string;
 	testId: string;
 	validators?: Validator[];
+	placeholder?: string;
 }
 
 export default interface FormProps {
@@ -14,6 +15,7 @@ export default interface FormProps {
 	name: string;
 	submitFunc?: () => void;
 	inputs?: InputProps[];
+	className?: string;
 }
 
 export type { InputProps, Validator };

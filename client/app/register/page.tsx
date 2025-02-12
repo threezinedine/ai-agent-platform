@@ -1,19 +1,28 @@
 'use client';
 
 import React from 'react';
-import Input from '@/app/components/forms/Form/Input';
+import Form from '@/app/components/Form';
+import clsx from 'clsx';
 
 export default function RegisterPage() {
 	return (
-		<div>
+		<div className={clsx('flex', 'flex-col', 'items-center')}>
 			<div>Register Page</div>
-			<Input
-				dataTestId="username"
-				validators={[
+			<Form
+				testId="register-form"
+				name="Register Form"
+				className="w-1/3"
+				inputs={[
 					{
-						validate: (value) => value.length > 8,
-						message:
-							'Username should be at least 8 characters long',
+						testId: 'username',
+						title: 'Username',
+						validators: [
+							{
+								validate: (value: string) => value.length > 8,
+								message:
+									'Username must be at least 8 characters long',
+							},
+						],
 					},
 				]}
 			/>
