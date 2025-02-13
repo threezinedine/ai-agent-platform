@@ -24,6 +24,35 @@ export default function RegisterPage() {
 							},
 						],
 					},
+					{
+						testId: 'password',
+						title: 'Password',
+						type: 'password',
+						validators: [
+							{
+								validate: (value: string) => value.length > 8,
+								message:
+									'Password must be at least 8 characters long',
+							},
+						],
+					},
+					{
+						testId: 'confirm-password',
+						title: 'Confirm Password',
+						type: 'password',
+						validators: [
+							{
+								validate: (value: string) => {
+									const password = document.querySelector(
+										'input[data-testid="password"]'
+									) as HTMLInputElement;
+
+									return password && value === password.value;
+								},
+								message: 'Passwords do not match',
+							},
+						],
+					},
 				]}
 			/>
 		</div>

@@ -90,7 +90,7 @@ describe('Form Testing', () => {
 		);
 
 		screen.getByTestId('test-input-1').focus();
-		screen.getByTestId('test-input-1').blur();
+		act(() => screen.getByTestId('test-input-1').blur());
 
 		act(() => screen.getByTestId('test-form-submit-btn').click());
 		expect(submitFunc).toBeCalledTimes(0);
@@ -230,5 +230,82 @@ describe('Form Testing', () => {
 
 		act(() => screen.getByTestId('test-form-submit-btn').click());
 		expect(screen.getByText(errorMsg)).toBeInstanceOf(HTMLDivElement);
+	});
+
+	it('should have password type input when type is password', () => {
+		render(
+			<Form
+				name="Test Form"
+				testId="test-form"
+				inputs={[
+					{
+						testId: 'password',
+						title: 'Password',
+						type: 'password',
+						validators: [],
+					},
+				]}
+			/>
+		);
+
+		const passwordInput = screen.getByTestId(
+			'password'
+		) as HTMLInputElement;
+		expect(passwordInput.type).toBe('password');
+	});
+
+	it('should display required error message when blur the input without changing value', () => {
+		render(
+			<Form
+				name="Test Form"
+				testId="test-form"
+				inputs={[
+					{
+						testId: 'surname',
+						title: 'Surname',
+						validators: [
+							{
+								validate: (value) => value.length > 0,
+								message: 'Surname is required',
+							},
+						],
+					},
+				]}
+			/>
+		);
+
+		const surnameInput = screen.getByTestId('surname');
+		surnameInput.focus();
+		act(() => surnameInput.blur());
+
+		expect(screen.getByText('Surname is required')).toBeInstanceOf(
+			HTMLDivElement
+		);
+	});
+
+	it('should display required error message when submit without changing value', () => {
+		render(
+			<Form
+				name="Test Form"
+				testId="test-form"
+				inputs={[
+					{
+						testId: 'surname',
+						title: 'Surname',
+						validators: [
+							{
+								validate: (value) => value.length > 0,
+								message: 'Surname is required',
+							},
+						],
+					},
+				]}
+			/>
+		);
+
+		act(() => screen.getByTestId('test-form-submit-btn').click());
+		expect(screen.getByText('Surname is required')).toBeInstanceOf(
+			HTMLDivElement
+		);
 	});
 });

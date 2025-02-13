@@ -154,7 +154,7 @@ class UserTest(unittest.TestCase):
             json={
                 "username": "fake-username",
                 "password": password,
-                "full_name": new_full_name,
+                "fullName": new_full_name,
                 "email": new_email,
             },
             headers={"Authorization": token},
@@ -163,7 +163,7 @@ class UserTest(unittest.TestCase):
         self.assertEqual(response.status_code, HTTP_200_OK)
 
         response_json = response.json()
-        self.assertEqual(response_json["full_name"], new_full_name)
+        self.assertEqual(response_json["fullName"], new_full_name)
         self.assertEqual(response_json["email"], new_email)
         self.assertEqual(response_json["username"], username)
         self.assertTrue("id" in response_json)

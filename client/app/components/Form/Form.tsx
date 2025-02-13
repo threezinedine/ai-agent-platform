@@ -38,10 +38,6 @@ export default function Form({
 	);
 
 	function handleSubmit() {
-		if (!submitFunc) {
-			return;
-		}
-
 		const newInputDataDict = JSON.parse(JSON.stringify(inputData));
 		let hasError = false;
 
@@ -65,7 +61,16 @@ export default function Form({
 		if (hasError) {
 			setInputData(newInputDataDict);
 		} else {
-			submitFunc();
+			if (!submitFunc) {
+				return;
+			}
+
+			submitFunc(
+				Object.keys(inputData).reduce((acc, key) => {
+					acc[key] = inputData[key].value;
+					return acc;
+				}, {} as { [key: string]: string })
+			);
 		}
 	}
 
@@ -124,6 +129,7 @@ export default function Form({
 						<input
 							data-testid={input.testId}
 							id={input.testId}
+							type={input.type || 'text'}
 							value={inputData[input.testId].value}
 							className={clsx(
 								'border',
@@ -145,6 +151,12 @@ export default function Form({
 							}
 							onChange={(e) =>
 								onInputChange(input.testId, e.target.value)
+							}
+							onBlur={() =>
+								onInputChange(
+									input.testId,
+									inputData[input.testId].value
+								)
 							}
 						/>
 						{inputData[input.testId].error && (

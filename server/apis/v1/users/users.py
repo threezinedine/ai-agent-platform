@@ -47,14 +47,14 @@ def login_user(
         token=generate_token(
             TokenGeneratorData(
                 user.username,
-                password=user.hashed_password,
+                password=user.hashedPassword,
             )
         ),
         user=UserInfo(
             id=user.id,
             username=user.username,
             email=user.email,
-            full_name=user.full_name,
+            full_name=user.fullName,
         ),
     )
 
@@ -96,18 +96,18 @@ def get_avatar(
 
     path = None
 
-    if user.avatar_url is None:
+    if user.avatarUrl is None:
         user.RemoveAvatar()
         session.commit()
         path = os.path.join(os.environ["AVATAR_FOLDER_DIR"], "default.png")
     elif not os.path.exists(
-        os.path.join(os.environ["AVATAR_FOLDER_DIR"], user.avatar_url)
+        os.path.join(os.environ["AVATAR_FOLDER_DIR"], user.avatarUrl)
     ):
         user.RemoveAvatar()
         session.commit()
         path = os.path.join(os.environ["AVATAR_FOLDER_DIR"], "default.png")
     else:
-        path = os.path.join(os.environ["AVATAR_FOLDER_DIR"], user.avatar_url)
+        path = os.path.join(os.environ["AVATAR_FOLDER_DIR"], user.avatarUrl)
 
     return FileResponse(path)
 
@@ -128,7 +128,7 @@ def set_avatar(
     with open(os.path.join(os.environ["AVATAR_FOLDER_DIR"], avatar_url), "wb") as f:
         f.write(avatar.file.read())
 
-    user.avatar_url = avatar_url
+    user.avatarUrl = avatar_url
     session.commit()
 
     return avatar.filename

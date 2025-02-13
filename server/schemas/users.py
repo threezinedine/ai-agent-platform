@@ -6,7 +6,7 @@ class UserInfo(BaseModel):
     id: int
     username: str
     email: Optional[str] = None
-    full_name: Optional[str] = None
+    fullName: Optional[str] = None
 
 
 class LoginResponse(BaseModel):
@@ -15,7 +15,7 @@ class LoginResponse(BaseModel):
 
 
 class UpdateUserInfo(BaseModel):
-    full_name: Optional[str] = None
+    fullName: Optional[str] = None
     email: Optional[str] = None
 
 
