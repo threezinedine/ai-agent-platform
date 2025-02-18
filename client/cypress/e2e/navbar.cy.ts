@@ -4,7 +4,43 @@ describe('Navbar Testing', () => {
 
 		cy.get('[data-testid=logo]').click();
 
-		cy.url().should('include', '/');
+		cy.url().should('include', '/home');
 		cy.url().should('not.include', '/login');
+	});
+
+	it('should navigate to the login page when clicking the login button', () => {
+		cy.visit('/home');
+
+		cy.get('[data-testid=login]').click();
+
+		cy.url().should('include', '/login');
+		cy.url().should('not.include', '/home');
+	});
+
+	it('should navigate to the register page when clicking the register button', () => {
+		cy.visit('/home');
+
+		cy.get('[data-testid=register]').click();
+
+		cy.url().should('include', '/register');
+		cy.url().should('not.include', '/home');
+		cy.get('[data-testid=user').should('not.exist');
+	});
+
+	it('should have no login or register button on dashboard page', () => {
+		cy.fixture('users').then((users) => {
+			cy.visit('/login');
+
+			cy.get('[data-testid=username]').type(users.defaultUser.username);
+			cy.get('[data-testid=password]').type(users.defaultUser.password);
+
+			cy.get('[data-testid=login-form-submit-btn]').click();
+
+			cy.visit('/dashboard');
+
+			cy.get('[data-testid=login]').should('not.exist');
+			cy.get('[data-testid=register]').should('not.exist');
+			cy.get('[data-testid=user').should('exist');
+		});
 	});
 });

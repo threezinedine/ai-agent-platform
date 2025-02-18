@@ -7,7 +7,7 @@ export function Logo() {
 	const router = useRouter();
 
 	function onClickLogo() {
-		router.push('/');
+		router.push('/home');
 	}
 
 	return (

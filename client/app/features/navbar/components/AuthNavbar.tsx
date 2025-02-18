@@ -5,7 +5,7 @@ export default function AuthNavbar() {
 	return (
 		<div>
 			<Logo />
-			AuthNavbar
+			<div data-testid="user">user</div>
 		</div>
 	);
 }
