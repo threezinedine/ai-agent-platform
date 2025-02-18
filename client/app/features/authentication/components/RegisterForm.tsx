@@ -14,7 +14,6 @@ export default function RegisterForm() {
 		try {
 			const response = await authenRequest.register(username, password);
 			if (response.isSuccess()) {
-				// Storage.SetItem('token', response.getData().token);
 			} else {
 				console.error(response.getMessage());
 			}

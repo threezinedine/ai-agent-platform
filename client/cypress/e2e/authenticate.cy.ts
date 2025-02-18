@@ -48,7 +48,9 @@ describe('Testing Authentication Feature', () => {
 
 		cy.get('[data-testid="register-form-submit-btn"]').click();
 
+		cy.wait(500);
 		cy.visit('/login');
+
 		const loginUsernameInput = cy.get('input#username');
 		loginUsernameInput.focus();
 		cy.wait(100);
