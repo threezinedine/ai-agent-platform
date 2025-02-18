@@ -6,18 +6,28 @@ import { useRouter } from 'next/navigation';
 
 interface AuthenticatePageProps {
 	children: React.ReactNode;
+	loadingNode: React.ReactNode;
 }
 
-export default function AuthenticatePage({ children }: AuthenticatePageProps) {
+export default function AuthenticatePage({
+	children,
+	loadingNode,
+}: AuthenticatePageProps) {
 	const router = useRouter();
-	const isAuthorized = useAuth();
+	const { isAuthorized, loading } = useAuth();
 
 	useEffect(() => {
-		if (!isAuthorized) {
-			router.push('/login');
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isAuthorized]);
+		(async () => {
+			if (loading) {
+				return;
+			}
 
-	return <>{children}</>;
+			if (!isAuthorized) {
+				router.push('/login');
+			}
+		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading]);
+
+	return <div>{loading ? loadingNode : children}</div>;
 }

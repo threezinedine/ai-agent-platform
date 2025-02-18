@@ -28,7 +28,7 @@ class UserTest(unittest.TestCase):
             },
         )
 
-        self.assertEqual(respose.status_code, HTTP_200_OK)
+        self.assertEqual(respose.status_code, HTTP_201_CREATED)
 
         response_json = respose.json()
         self.assertEqual(response_json["username"], username)

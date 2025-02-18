@@ -14,4 +14,18 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
+
+before(() => {
+	// cy.fixture('users').then((users) => {
+	// 	// register the default user
+	// 	cy.request({
+	// 		method: 'POST',
+	// 		url: 'http://localhost:8000/api/v1/users/register',
+	// 		body: users.defaultUser,
+	// 		failOnStatusCode: false,
+	// 	}).then((response) => {
+	// 		expect(response.status).to.eq(201);
+	// 	});
+	// });
+});

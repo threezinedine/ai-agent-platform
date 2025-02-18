@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 router = APIRouter(prefix="/api/v1/users", tags=["users", "authenticate"])
 
 
-@router.post("/register")
+@router.post("/register", status_code=HTTP_201_CREATED)
 def register_new_user(
     user_info: UserLoginInfo,
     session: SessionDependency,

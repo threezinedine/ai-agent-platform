@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 from contextlib import asynccontextmanager
-from databases.db_tools import create_db_and_tables
+from databases.db_tools import create_db_and_tables, create_default_users
 import shutil
 import logging
 
@@ -14,6 +14,7 @@ load_dotenv()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_db_and_tables()
+    create_default_users()
 
     avatar_dir = os.environ["AVATAR_FOLDER_DIR"]
     if avatar_dir is None:

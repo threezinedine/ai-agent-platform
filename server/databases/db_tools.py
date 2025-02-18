@@ -1,6 +1,6 @@
 import os
 from typing import *
-from sqlmodel import Session, create_engine, SQLModel
+from sqlmodel import Session, create_engine, SQLModel, select
 from fastapi import Depends
 from dotenv import load_dotenv
 import logging
@@ -45,6 +45,43 @@ def get_session():
 def get_test_session():
     with Session(test_engine) as session:
         yield session
+
+
+def create_default_users():
+    with Session(engine) as session:
+        # check if the admin user exists
+        admin_username = os.environ.get("ADMIN_USERNAME", "admin")
+        admin_password = os.environ.get("ADMIN_PASSWORD", "admin")
+
+        admin = session.exec(
+            select(User).where(User.username == admin_username)
+        ).first()
+        if not admin:
+            admin = User(
+                username=admin_username,
+                hashedPassword=hash_password(admin_password),
+            )
+
+            session.add(admin)
+            session.commit()
+            session.refresh(admin)
+
+        # check if the test user exists
+        user_username = os.environ.get("USER_USERNAME", "user")
+        user_password = os.environ.get("USER_PASSWORD", "user")
+
+        test_user = session.exec(
+            select(User).where(User.username == user_username)
+        ).first()
+        if not test_user:
+            test_user = User(
+                username=user_username,
+                hashedPassword=hash_password(user_password),
+            )
+
+            session.add(test_user)
+            session.commit()
+            session.refresh(test_user)
 
 
 SessionDependency = Annotated[Session, Depends(get_session)]
