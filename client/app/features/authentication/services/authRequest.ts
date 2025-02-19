@@ -1,5 +1,5 @@
 import HttpRequest, { Response } from '@/app/services/httpRequest';
-import { LoginResponse, UserLoginInfo } from '../data/types';
+import { LoginResponse, UserLoginInfo, UserInfo } from '../data/types';
 
 export default class AuthenRequest {
 	private httpRequest: HttpRequest = new HttpRequest(
@@ -32,7 +32,7 @@ export default class AuthenRequest {
 		);
 	}
 
-	async verifyToken(token: string): Promise<Response<LoginResponse>> {
-		return this.httpRequest.get<LoginResponse>(`/users/me`, token);
+	async verifyToken(token: string): Promise<Response<UserInfo>> {
+		return this.httpRequest.get<UserInfo>(`/users/me`, token);
 	}
 }
