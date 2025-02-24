@@ -3,7 +3,7 @@ import { LoginResponse, UserLoginInfo, UserInfo } from '../data/types';
 
 export default class AuthenRequest {
 	private httpRequest: HttpRequest = new HttpRequest(
-		'http://localhost:8000/api/v1'
+		`${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1`
 	);
 
 	async login(

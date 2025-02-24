@@ -22,7 +22,10 @@ services:
             - db
 
     frontend:
-        build: ./client
+        build:
+            context: ./client
+            args:
+                NEXT_PUBLIC_SERVER_URL: 'http://localhost:3000'
         expose:
             - 3000
         depends_on:

@@ -54,6 +54,12 @@ from apis.v1.users import router as users_router
 
 app.include_router(users_router)
 
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
 if __name__ == "__main__":
     import uvicorn
 

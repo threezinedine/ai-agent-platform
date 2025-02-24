@@ -8,6 +8,8 @@ RUN npm install --frozen-lockfile
 
 COPY . .
 
+COPY .override.env .env
+
 RUN npm run build
 
 EXPOSE 3000
