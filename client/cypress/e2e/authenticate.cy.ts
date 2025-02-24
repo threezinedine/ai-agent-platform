@@ -89,7 +89,6 @@ describe('Testing Authentication Feature', () => {
 			cy.get('input#password').type(defaultUser.password);
 			cy.get('[data-testid="login-form-submit-btn"]').click();
 
-			cy.visit('/dashboard');
 			cy.wait(500);
 			cy.url().should('include', '/dashboard');
 		});

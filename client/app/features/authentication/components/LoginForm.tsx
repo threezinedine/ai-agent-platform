@@ -5,9 +5,11 @@ import Form from '@/app/components/Form';
 import clsx from 'clsx';
 import AuthenRequest from '../services/authRequest';
 import Storage from '@/app/utils/storage';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
 	const authenRequest = new AuthenRequest();
+	const router = useRouter();
 
 	async function handleSubmit(data: { [key: string]: string }) {
 		const { username, password } = data;
@@ -16,6 +18,7 @@ export default function LoginForm() {
 			const response = await authenRequest.login(username, password);
 			if (response.isSuccess()) {
 				Storage.SetItem('token', response.getData()?.token);
+				router.push('/dashboard');
 			} else {
 				console.error(response.getMessage());
 			}
