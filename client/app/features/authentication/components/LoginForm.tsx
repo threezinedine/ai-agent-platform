@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import AuthenRequest from '../services/authRequest';
 import Storage from '@/app/utils/storage';
 import { useRouter } from 'next/navigation';
+import { ToastService } from '@/app/features/toast';
 
 export default function LoginForm() {
 	const authenRequest = new AuthenRequest();
@@ -19,6 +20,10 @@ export default function LoginForm() {
 			if (response.isSuccess()) {
 				Storage.SetItem('token', response.getData()?.token);
 				router.push('/dashboard');
+				ToastService.getInstance().addToastMessage({
+					message: 'Login successfully',
+					type: 'success',
+				});
 			} else {
 				console.error(response.getMessage());
 			}

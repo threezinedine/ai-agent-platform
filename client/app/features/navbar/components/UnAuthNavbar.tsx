@@ -2,24 +2,36 @@
 
 import React from 'react';
 import { Logo } from './Logo';
-import Link from 'next/link';
+import clsx from 'clsx';
+import MyLink from './MyLink';
 
 export default function UnAuthNavbar() {
 	return (
-		<div>
+		<div
+			className={clsx(
+				'flex',
+				'items-center',
+				'justify-between',
+				'w-full',
+				'p-4'
+			)}
+		>
 			<Logo />
-			<Link
-				href="/login"
-				data-testid="login"
-			>
-				Login
-			</Link>
-			<Link
-				href="/register"
-				data-testid="register"
-			>
-				Register
-			</Link>
+			<div className={clsx('p-2', 'flex', 'space-x-4', 'mr-4')}>
+				<MyLink
+					href="/login"
+					testId="login"
+				>
+					Login
+				</MyLink>
+				<MyLink
+					href="/register"
+					testId="register"
+					secondary
+				>
+					Register
+				</MyLink>
+			</div>
 		</div>
 	);
 }

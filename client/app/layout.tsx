@@ -1,4 +1,5 @@
 import '@/app/assets/globals.css';
+import Toast from './features/toast';
 
 export default function RootLayout({
 	children,
@@ -7,7 +8,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body>
+				<div>{children}</div>
+				<Toast />
+			</body>
 		</html>
 	);
 }

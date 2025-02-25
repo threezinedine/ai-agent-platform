@@ -5,6 +5,7 @@ import { Logo } from './Logo';
 import { AuthenticatePage, AuthContext } from '@/app/features/authentication';
 import { Button } from '@/app/components/Button/Button';
 import { useRouter } from 'next/navigation';
+import clsx from 'clsx';
 
 function AuthNavbar() {
 	const { user, logout } = useContext(AuthContext);
@@ -16,7 +17,15 @@ function AuthNavbar() {
 	}
 
 	return (
-		<div>
+		<div
+			className={clsx(
+				'flex',
+				'items-center',
+				'justify-between',
+				'w-full',
+				'p-4'
+			)}
+		>
 			<Logo />
 			<div data-testid={user?.username}>{user?.username}</div>
 			<Button
