@@ -107,7 +107,7 @@ jobs:
               run: |
                   ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
                   cd ~
-                  rm -r ./ai-agent-platform
+                  rm -r ai-agent-platform
                   git clone https://github.com/threezinedine/ai-agent-platform.git
                   cd ai-agent-platform
                   docker compose down
