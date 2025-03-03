@@ -87,3 +87,27 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   working-directory: client
+
+    deploy:
+        needs: [test-backend, test-frontend, e2e-test]
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup ssh
+              run: |
+                  mkdir -p ~/.ssh/
+                  echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+              shell: bash
+
+            - name: Deploy via SSH
+              run: |
+                  ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+                  rm -rf ./ai-agent-platform
+                  git clone https://github.com/threezinedine/ai-agent-platform.git
+                  cd ai-agent-platform
+                  docker compose -f docker-compose.yaml -f docker-compose.host.yaml up -d
+              shell: bash
