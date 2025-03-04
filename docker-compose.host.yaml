@@ -2,8 +2,8 @@ services:
     proxy:
         volumes:
             - ./nginx/nginx.host.conf:/etc/nginx/nginx.conf
-            - /etc/letsencrypt/live/csvbachkhoa.shop/fullchain.pem:/ect/nginx/ssl/fullchain.pem
-            - /etc/letsencrypt/live/csvbachkhoa.shop/privkey.pem:/ect/nginx/ssl/privkey.pem
+            - /etc/letsencrypt/live/csvbachkhoa.shop/fullchain.pem:/etc/nginx/ssl/fullchain.pem
+            - /etc/letsencrypt/live/csvbachkhoa.shop/privkey.pem:/etc/nginx/ssl/privkey.pem
         ports:
             - '80:80'
 
