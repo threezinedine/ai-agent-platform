@@ -1,6 +1,8 @@
-version: '3.8'
-
 services:
+    proxy:
+        ports:
+            - '80:80'
+
     frontend:
         environment:
-            - NEXT_PUBLIC_SERVER_URL=http://csvbachkhoa.shop:3000
+            - NEXT_PUBLIC_SERVER_URL=http://csvbachkhoa.shop:80
