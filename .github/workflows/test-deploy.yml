@@ -89,7 +89,7 @@ jobs:
                   working-directory: client
 
     deploy:
-        needs: [test-backend, test-frontend]
+        needs: [test-backend, test-frontend, e2e-test]
         runs-on: ubuntu-latest
 
         steps:
