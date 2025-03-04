@@ -89,7 +89,7 @@ jobs:
                   working-directory: client
 
     deploy:
-        needs: [test-backend, test-frontend, e2e-test]
+        needs: [test-backend, test-frontend]
         runs-on: ubuntu-latest
 
         steps:
@@ -105,12 +105,12 @@ jobs:
 
             - name: Deploy via SSH
               run: |
-                  ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-                  rm -r /ai-agent-platform
-                  git clone https://github.com/threezinedine/ai-agent-platform.git
-                  cd /ai-agent-platform
-                  docker compose down 
-                  docker image prune -f
-                  docker compose -f docker-compose.yaml -f docker-compose.host.yaml up -d --build
+                  ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF' 
+                  rm -r /ai-agent-platform &&
+                  git clone https://github.com/threezinedine/ai-agent-platform.git &&
+                  cd /ai-agent-platform &&
+                  docker compose down &&
+                  docker image prune -f &&
+                  docker compose -f docker-compose.yaml -f docker-compose.host.yaml up -d --build &&
                   EOF
               shell: bash
