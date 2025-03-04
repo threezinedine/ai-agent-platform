@@ -9,4 +9,4 @@ services:
 
     frontend:
         environment:
-            - NEXT_PUBLIC_SERVER_URL=http://csvbachkhoa.shop:80
+            - NEXT_PUBLIC_SERVER_URL=https://csvbachkhoa.shop
