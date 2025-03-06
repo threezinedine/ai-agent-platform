@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import ToastMessage from './ToastMessage';
 import { useRouter } from 'next/navigation';
 import ToastService from '../services/ToastServices';
+import clsx from 'clsx';
 
 export default function Toast() {
 	const router = useRouter();
@@ -19,7 +20,16 @@ export default function Toast() {
 	});
 
 	return (
-		<div className="toast">
+		<div
+			className={clsx(
+				'fixed',
+				'bottom-5',
+				'right-5',
+				'max-w-sm',
+				'z-50',
+				'w-full'
+			)}
+		>
 			{ToastService.getInstance()
 				.getToastMessages()
 				.map((message, index) => (

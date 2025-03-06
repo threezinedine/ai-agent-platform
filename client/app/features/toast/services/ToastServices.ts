@@ -46,4 +46,15 @@ export default class ToastService {
 			}
 		});
 	}
+
+	public removeToastMessage(message: string) {
+		const index = this.toastMessages.findIndex(
+			(toastMessage) => toastMessage.message === message
+		);
+
+		if (index !== -1) {
+			this.toastMessages.splice(index, 1);
+			this.onChangedCallback();
+		}
+	}
 }

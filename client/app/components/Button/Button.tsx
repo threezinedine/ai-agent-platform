@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import 'react';
 
 interface ButtonProps {
@@ -5,6 +6,7 @@ interface ButtonProps {
 	onClick?: () => void;
 	disabled?: boolean;
 	testId?: string;
+	className?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -12,6 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
 	onClick,
 	disabled,
 	testId,
+	className,
 }) => {
 	function handleClick() {
 		if (disabled) {
@@ -25,6 +28,22 @@ export const Button: React.FC<ButtonProps> = ({
 
 	return (
 		<div
+			className={clsx(
+				{ 'bg-blue-500': !className },
+				'rounded-md',
+				'select-none',
+				'text-white',
+				'p-4',
+				'mx-2',
+				'cursor-pointer',
+				'inline-block',
+				{ 'hover:bg-blue-600': !className },
+				'transition-colors',
+				'duration-200',
+				'ease-in-out',
+				{ 'opacity-50': disabled },
+				className
+			)}
 			{...(testId ? { 'data-testid': testId } : {})}
 			onClick={handleClick}
 		>
