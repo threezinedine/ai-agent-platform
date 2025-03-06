@@ -54,7 +54,8 @@ export default function ToastMessage({ type, message }: ToastMessageProps) {
 				'mb-2',
 				'shadow-md',
 				styles.background,
-				styles.border
+				styles.border,
+				`toast-message--${type}`
 			)}
 		>
 			<div
