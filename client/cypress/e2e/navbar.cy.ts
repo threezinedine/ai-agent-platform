@@ -66,4 +66,18 @@ describe('Navbar Testing', () => {
 			cy.url().should('include', '/login');
 		});
 	});
+
+	it('should show user info at the home page when logged in', () => {
+		cy.fixture('users').then((users) => {
+			cy.visit('/login');
+			cy.get('[data-testid=username]').type(users.defaultUser.username);
+			cy.get('[data-testid=password]').type(users.defaultUser.password);
+			cy.get('[data-testid=login-form-submit-btn]').click();
+
+			cy.visit('/home');
+			cy.get(`[data-testid=${users.defaultUser.username}]`).should(
+				'exist'
+			);
+		});
+	});
 });

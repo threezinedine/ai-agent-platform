@@ -10,11 +10,13 @@ import Storage from '@/app/utils/storage';
 interface AuthenticatePageProps {
 	children: React.ReactNode;
 	loadingNode?: React.ReactNode;
+	unauthorizedNode?: React.ReactNode;
 }
 
 export default function AuthenticatePage({
 	children,
 	loadingNode,
+	unauthorizedNode,
 }: AuthenticatePageProps) {
 	const router = useRouter();
 	const { isAuthorized, loading, user } = useAuth();
@@ -26,7 +28,9 @@ export default function AuthenticatePage({
 			}
 
 			if (!isAuthorized) {
-				router.push('/login');
+				if (unauthorizedNode == null || unauthorizedNode == undefined) {
+					router.push('/login');
+				}
 			}
 		})();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +50,8 @@ export default function AuthenticatePage({
 		>
 			{loading && loadingNode && loadingNode}
 			{loading && !loadingNode && <LoadingPage />}
-			{!loading && children}
+			{!loading && isAuthorized && children}
+			{!loading && !isAuthorized && unauthorizedNode}
 		</AuthContext.Provider>
 	);
 }

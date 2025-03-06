@@ -5,6 +5,7 @@ import { Logo } from './Logo';
 import { AuthenticatePage, AuthContext } from '@/app/features/authentication';
 import { Button } from '@/app/components/Button/Button';
 import { useRouter } from 'next/navigation';
+import { ToastService } from '@/app/features/toast';
 import clsx from 'clsx';
 
 function AuthNavbar() {
@@ -13,7 +14,12 @@ function AuthNavbar() {
 
 	function onLogout() {
 		logout();
-		router.push('/home');
+		router.push('/');
+		ToastService.getInstance().addToastMessage({
+			message: 'Logged out successfully',
+			type: 'success',
+			duration: 10000,
+		});
 	}
 
 	return (

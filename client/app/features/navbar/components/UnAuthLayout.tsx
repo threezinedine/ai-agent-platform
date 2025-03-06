@@ -1,5 +1,9 @@
+'use client';
+
 import React from 'react';
 import UnAuthNavbar from './UnAuthNavbar';
+import { AuthenticatePage } from '@/app/features/authentication';
+import AuthNavbar from './AuthNavbar';
 
 export default function UnAuthLayout({
 	children,
@@ -7,9 +11,9 @@ export default function UnAuthLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<div>
-			<UnAuthNavbar />
+		<AuthenticatePage unauthorizedNode={<UnAuthNavbar />}>
+			<AuthNavbar />
 			{children}
-		</div>
+		</AuthenticatePage>
 	);
 }
