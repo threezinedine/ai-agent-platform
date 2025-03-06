@@ -27,7 +27,11 @@ export default class ToastService {
 	}
 
 	public addToastMessage(message: ToastMessageProps) {
-		if (this.toastMessages.includes(message)) {
+		if (
+			this.toastMessages.some(
+				(toastMessage) => toastMessage.message === message.message
+			)
+		) {
 			return;
 		}
 
