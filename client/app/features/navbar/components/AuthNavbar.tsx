@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AuthenticatePage, AuthContext } from '@/app/features/authentication';
 import { useRouter } from 'next/navigation';
 import { ToastService } from '@/app/features/toast';
@@ -11,10 +11,23 @@ import {
 	ToggleMenuSeparator,
 } from '@/app/components/ToggleMenu';
 import UserAvatar from '@/app/components/UserAvatar';
+import NavbarRequest from '../services/navbarRequest';
 
 function AuthNavbar() {
 	const { user, logout } = useContext(AuthContext);
 	const router = useRouter();
+	const navbarRequest = new NavbarRequest();
+	const [avatarUrl, setAvatarUrl] = React.useState<string | null>(null);
+
+	useEffect(() => {
+		(async () => {
+			const response = await navbarRequest.getAvatar();
+			if (response.isSuccess()) {
+				setAvatarUrl(response.getData());
+			}
+		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	function onLogout() {
 		logout();
@@ -35,6 +48,7 @@ function AuthNavbar() {
 					<UserAvatar
 						testId={user?.username}
 						username={user?.username || '?'}
+						image={avatarUrl}
 					/>
 				}
 			>

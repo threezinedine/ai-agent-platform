@@ -56,6 +56,44 @@ class HttpRequest {
 		}
 	}
 
+	async getImage(url: string, token: string = ''): Promise<Response<string>> {
+		url = `${this.baseUrl}${url}`;
+		const header = token ? { Authorization: token } : {};
+
+		try {
+			const response = await axios.get(url, {
+				headers: header,
+				responseType: 'blob',
+			});
+
+			const reader = new FileReader();
+			reader.readAsDataURL(response.data);
+			const blob = response.data;
+			const imageURL = URL.createObjectURL(blob);
+			return new Promise((resolve) => {
+				reader.onloadend = () => {
+					resolve(
+						new Response<string>(response.status, imageURL, '')
+					);
+				};
+			});
+		} catch (error: unknown) {
+			if (!axios.isAxiosError(error)) {
+				const axiosError = error as AxiosError;
+				return new Response<string>(
+					axiosError.response ? axiosError.response.status : 500,
+					null,
+					axiosError.response
+						? (axiosError.response.data as { message: string })
+								.message
+						: 'An error occurred'
+				);
+			} else {
+				return new Response<string>(1000, null, 'Unknown error');
+			}
+		}
+	}
+
 	async post<K, T>(url: string, data: K): Promise<Response<T>> {
 		const response = await axios.post<T>(`${this.baseUrl}${url}`, data);
 		return new Response<T>(response.status, response.data, '');

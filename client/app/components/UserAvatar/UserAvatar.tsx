@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
+import Image from 'next/image';
 
 export default function UserAvatar({
 	username,
@@ -8,7 +9,7 @@ export default function UserAvatar({
 	size = 'md',
 }: {
 	username: string;
-	image?: File;
+	image?: string | null;
 	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 	testId?: string;
 }) {
@@ -47,10 +48,21 @@ export default function UserAvatar({
 	return (
 		<div
 			data-testid={testId}
-			className={clsx('select-none', 'cursor-pointer')}
+			className={clsx(
+				'select-none',
+				'cursor-pointer',
+				'hover:opacity-80'
+			)}
 		>
 			{image ? (
-				<div></div>
+				<div className={clsx('rounded-full', 'overflow-hidden')}>
+					<Image
+						src={image}
+						alt="Image"
+						width={40}
+						height={40}
+					/>
+				</div>
 			) : (
 				<div
 					className={clsx(
