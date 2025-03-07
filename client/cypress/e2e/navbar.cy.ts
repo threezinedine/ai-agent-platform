@@ -57,6 +57,7 @@ describe('Navbar Testing', () => {
 
 			cy.visit('/dashboard');
 
+			cy.get('[data-testid=user-menu-trigger]').click();
 			cy.get('[data-testid=logout]').click();
 
 			cy.url().should('include', '/home');

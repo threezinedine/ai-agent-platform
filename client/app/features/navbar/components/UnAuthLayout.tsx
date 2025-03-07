@@ -11,7 +11,14 @@ export default function UnAuthLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<AuthenticatePage unauthorizedNode={<UnAuthNavbar />}>
+		<AuthenticatePage
+			unauthorizedNode={
+				<>
+					<UnAuthNavbar />
+					{children}
+				</>
+			}
+		>
 			<AuthNavbar />
 			{children}
 		</AuthenticatePage>

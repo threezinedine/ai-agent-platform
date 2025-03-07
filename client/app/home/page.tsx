@@ -4,6 +4,11 @@ import React from 'react';
 import { ToastService } from '@/app/features/toast';
 import { Button } from '@/app/components/Button/Button';
 import clsx from 'clsx';
+import {
+	ToggleItem,
+	ToggleMenu,
+	ToggleMenuSeparator,
+} from '@/app/components/ToggleMenu';
 
 export default function Home() {
 	function ShowSuccess() {
@@ -58,6 +63,13 @@ export default function Home() {
 				text="Show Error"
 				className={clsx('bg-red-500', 'hover:bg-red-600')}
 			/>
+
+			<ToggleMenu className={clsx('mr-5')}>
+				<ToggleItem>Testing</ToggleItem>
+				<ToggleItem>Testing 2</ToggleItem>
+				<ToggleMenuSeparator />
+				<ToggleItem>Testing 3</ToggleItem>
+			</ToggleMenu>
 		</div>
 	);
 }

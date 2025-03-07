@@ -1,12 +1,16 @@
 'use client';
 
 import React, { useContext } from 'react';
-import { Logo } from './Logo';
 import { AuthenticatePage, AuthContext } from '@/app/features/authentication';
-import { Button } from '@/app/components/Button/Button';
 import { useRouter } from 'next/navigation';
 import { ToastService } from '@/app/features/toast';
-import clsx from 'clsx';
+import NavbarCommon from './NavbarCommon';
+import {
+	ToggleMenu,
+	ToggleItem,
+	ToggleMenuSeparator,
+} from '@/app/components/ToggleMenu';
+import UserAvatar from '@/app/components/UserAvatar';
 
 function AuthNavbar() {
 	const { user, logout } = useContext(AuthContext);
@@ -23,23 +27,25 @@ function AuthNavbar() {
 	}
 
 	return (
-		<div
-			className={clsx(
-				'flex',
-				'items-center',
-				'justify-between',
-				'w-full',
-				'p-4'
-			)}
-		>
-			<Logo />
-			<div data-testid={user?.username}>{user?.username}</div>
-			<Button
-				onClick={onLogout}
-				testId="logout"
-				text="Log out"
-			/>
-		</div>
+		<NavbarCommon>
+			<ToggleMenu
+				testId="user-menu"
+				menuOnRight
+				triggerNode={<UserAvatar username={user?.username || '?'} />}
+			>
+				<ToggleItem onClick={() => router.push('/dashboard')}>
+					Dashboard
+				</ToggleItem>
+				<ToggleMenuSeparator />
+				<ToggleItem
+					onClick={onLogout}
+					testId="logout"
+					className="text-red-500"
+				>
+					Logout
+				</ToggleItem>
+			</ToggleMenu>
+		</NavbarCommon>
 	);
 }
 

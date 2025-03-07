@@ -1,22 +1,13 @@
 'use client';
 
 import React from 'react';
-import { Logo } from './Logo';
 import clsx from 'clsx';
 import MyLink from './MyLink';
+import NavbarCommon from './NavbarCommon';
 
 export default function UnAuthNavbar() {
 	return (
-		<div
-			className={clsx(
-				'flex',
-				'items-center',
-				'justify-between',
-				'w-full',
-				'p-4'
-			)}
-		>
-			<Logo />
+		<NavbarCommon>
 			<div className={clsx('p-2', 'flex', 'space-x-4', 'mr-4')}>
 				<MyLink
 					href="/login"
@@ -32,6 +23,6 @@ export default function UnAuthNavbar() {
 					Register
 				</MyLink>
 			</div>
-		</div>
+		</NavbarCommon>
 	);
 }
