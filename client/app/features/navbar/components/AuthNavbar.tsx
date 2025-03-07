@@ -31,7 +31,12 @@ function AuthNavbar() {
 			<ToggleMenu
 				testId="user-menu"
 				menuOnRight
-				triggerNode={<UserAvatar username={user?.username || '?'} />}
+				triggerNode={
+					<UserAvatar
+						testId={user?.username}
+						username={user?.username || '?'}
+					/>
+				}
 			>
 				<ToggleItem onClick={() => router.push('/dashboard')}>
 					Dashboard

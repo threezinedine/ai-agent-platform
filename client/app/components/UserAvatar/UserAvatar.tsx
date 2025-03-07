@@ -4,11 +4,13 @@ import React from 'react';
 export default function UserAvatar({
 	username,
 	image,
+	testId,
 	size = 'md',
 }: {
 	username: string;
 	image?: File;
 	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+	testId?: string;
 }) {
 	const firstLetter = username.charAt(0).toUpperCase() || '?';
 
@@ -43,7 +45,10 @@ export default function UserAvatar({
 	const letterColorClasses = generateColor(username);
 
 	return (
-		<div className={clsx('select-none', 'cursor-pointer')}>
+		<div
+			data-testid={testId}
+			className={clsx('select-none', 'cursor-pointer')}
+		>
 			{image ? (
 				<div></div>
 			) : (
