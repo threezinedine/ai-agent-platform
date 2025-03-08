@@ -47,7 +47,7 @@ export default function ToggleMenu({
 	return (
 		<div
 			data-testid={testId}
-			className={clsx('relative', className)}
+			className={clsx('relative', 'inline-block', className)}
 		>
 			<div
 				ref={buttonRef}
