@@ -1,9 +1,8 @@
+'use client';
+
 import React from 'react';
+import ProfilePageComponent from '@/app/features/profile';
 
 export default function ProfilePage() {
-	return (
-		<div>
-			<h1>Profile Page</h1>
-		</div>
-	);
+	return <ProfilePageComponent />;
 }
