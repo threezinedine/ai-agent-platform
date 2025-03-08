@@ -55,6 +55,9 @@ function AuthNavbar() {
 				<ToggleItem onClick={() => router.push('/dashboard')}>
 					Dashboard
 				</ToggleItem>
+				<ToggleItem onClick={() => router.push('/profile')}>
+					Profile
+				</ToggleItem>
 				<ToggleMenuSeparator />
 				<ToggleItem
 					onClick={onLogout}
