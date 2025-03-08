@@ -9,6 +9,7 @@ import {
 	ToggleMenu,
 	ToggleMenuSeparator,
 } from '@/app/components/ToggleMenu';
+import Modal from '@/app/components/Modal';
 
 export default function Home() {
 	function ShowSuccess() {
@@ -70,6 +71,10 @@ export default function Home() {
 				<ToggleMenuSeparator />
 				<ToggleItem>Testing 3</ToggleItem>
 			</ToggleMenu>
+
+			<Modal>
+				<div>Modal Content</div>
+			</Modal>
 		</div>
 	);
 }
