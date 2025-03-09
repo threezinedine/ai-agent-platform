@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import LoadingPage from './LoadingPage';
 import { AuthContext } from '../context/AuthContext';
 import Storage from '@/app/utils/storage';
+import * as constants from '../data/constants';
 
 interface AuthenticatePageProps {
 	children: React.ReactNode;
@@ -37,7 +38,7 @@ export default function AuthenticatePage({
 	}, [loading]);
 
 	function onLogout() {
-		Storage.RemoveItem('accessToken');
+		Storage.RemoveItem(constants.ACCESS_TOKEN_KEY);
 	}
 
 	return (

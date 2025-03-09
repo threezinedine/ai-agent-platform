@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Storage from '@/app/utils/storage';
 import AuthenRequest from '../services/authRequest';
 import { UserInfo } from '../data/types';
+import * as constants from '../data/constants';
 
 export default function useAuth() {
 	const [isAuthorized, setIsAuthorized] = useState(false);
@@ -13,7 +14,7 @@ export default function useAuth() {
 
 	useEffect(() => {
 		(async () => {
-			const token = await Storage.GetItem('accessToken', '');
+			const token = await Storage.GetItem(constants.ACCESS_TOKEN_KEY, '');
 			if (token !== '') {
 				setIsAuthorized(true);
 			}

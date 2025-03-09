@@ -8,6 +8,7 @@ import Storage from '@/app/utils/storage';
 import { useRouter } from 'next/navigation';
 import { ToastService } from '@/app/features/toast';
 import Button from '@/app/components/Button';
+import * as constants from '../data/constants';
 
 export default function LoginForm() {
 	const authenRequest = new AuthenRequest();
@@ -19,7 +20,10 @@ export default function LoginForm() {
 		try {
 			const response = await authenRequest.login(username, password);
 			if (response.isSuccess()) {
-				Storage.SetItem('accessToken', response.getData()?.accessToken);
+				Storage.SetItem(
+					constants.ACCESS_TOKEN_KEY,
+					response.getData()?.accessToken
+				);
 				Storage.SetItem(
 					'refreshToken',
 					response.getData()?.refreshToken
