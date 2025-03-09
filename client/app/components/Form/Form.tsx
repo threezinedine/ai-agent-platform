@@ -142,7 +142,7 @@ const Form = forwardRef(
 						{name}
 					</h2>
 					{description && (
-						<p
+						<div
 							className={clsx(
 								'text-gray-600',
 								'dark:text-gray-300',
@@ -150,7 +150,7 @@ const Form = forwardRef(
 							)}
 						>
 							{description}
-						</p>
+						</div>
 					)}
 				</div>
 				<div className={clsx('space-y-6')}>

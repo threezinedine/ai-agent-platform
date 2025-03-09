@@ -41,15 +41,13 @@ export default function LoginForm() {
 			submitFunc={handleSubmit}
 			footer={
 				<div>
-					<p>
-						Do not have an account?
-						<Button
-							variant="link"
-							text="Register"
-							size="sm"
-							onClick={() => router.push('/register')}
-						/>
-					</p>
+					Do not have an account?
+					<Button
+						variant="link"
+						text="Register"
+						size="sm"
+						onClick={() => router.push('/register')}
+					/>
 				</div>
 			}
 			inputs={[
