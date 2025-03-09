@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 import FontAwesomeIcon from '@/app/components/FontAwesomeIcon';
 import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import Tooltip from '@/app/components/Tooltip';
 
 export default function Footer() {
 	const platformName = 'AI Agent Platform';
@@ -76,27 +77,33 @@ export default function Footer() {
 						)}
 					>
 						{sitesInfo.map((siteInfo, index) => (
-							<a
+							<Tooltip
 								key={index}
-								href={siteInfo.link}
-								aria-label={siteInfo.name}
-								className={clsx(
-									'p-2',
-									'rounded-md',
-									'text-gray-600',
-									'dark:text-gray-400',
-									'hover:text-gray-900',
-									'dark:hover:text-gray-100',
-									'hover:bg-gray-100',
-									'dark:hover:bg-gray-800',
-									'transition-colors',
-									'duration-200'
-								)}
-								target="_blank"
-								rel="noopener noreferrer"
+								tooltip={<div>{siteInfo.description}</div>}
+								position="left"
+								offset={0}
 							>
-								{siteInfo.icon}
-							</a>
+								<a
+									href={siteInfo.link}
+									aria-label={siteInfo.name}
+									className={clsx(
+										'p-2',
+										'rounded-md',
+										'text-gray-600',
+										'dark:text-gray-400',
+										'hover:text-gray-900',
+										'dark:hover:text-gray-100',
+										'hover:bg-gray-100',
+										'dark:hover:bg-gray-800',
+										'transition-colors',
+										'duration-200'
+									)}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{siteInfo.icon}
+								</a>
+							</Tooltip>
 						))}
 					</div>
 				</div>
