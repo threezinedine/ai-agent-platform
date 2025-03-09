@@ -1,7 +1,7 @@
 import 'react';
 import '@testing-library/jest-dom';
 import { describe, expect, it, jest } from '@jest/globals';
-import { Button } from '../Button';
+import Button from '../Button';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 describe('Button Testing', () => {

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ToastService } from '@/app/features/toast';
-import { Button } from '@/app/components/Button/Button';
+import Button from '@/app/components/Button';
 import clsx from 'clsx';
 import {
 	ToggleItem,
@@ -45,24 +45,28 @@ export default function Home() {
 			<Button
 				onClick={ShowSuccess}
 				text="Show Success"
-				className={clsx('bg-green-500', 'hover:bg-green-600')}
+				variant="success"
+				className={clsx('mx-2')}
 			/>
 			<Button
 				onClick={ShowInfo}
 				text="Show Info"
-				className={clsx('bg-blue-500', 'hover:bg-blue-600')}
+				variant="primary"
+				className={clsx('mx-2')}
 			/>
 
 			<Button
 				onClick={ShowWarning}
 				text="Show Warning"
-				className={clsx('bg-yellow-500', 'hover:bg-yellow-600')}
+				variant="warning"
+				className={clsx('mx-2')}
 			/>
 
 			<Button
 				onClick={ShowError}
 				text="Show Error"
-				className={clsx('bg-red-500', 'hover:bg-red-600')}
+				variant="danger"
+				className={clsx('mx-2')}
 			/>
 
 			<ToggleMenu className={clsx('mr-5')}>
