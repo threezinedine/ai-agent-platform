@@ -15,6 +15,7 @@ export default function Form({
 	submitFunc,
 	inputs = [],
 	className = '',
+	submitHidden = false,
 }: FormProps) {
 	const validatorDict = inputs.reduce((acc, input) => {
 		if (!input.validators) {
@@ -173,23 +174,25 @@ export default function Form({
 					</div>
 				))}
 			</div>
-			<div
-				data-testid={`${testId}-submit-btn`}
-				className={clsx(
-					'bg-blue-500',
-					'cursor-pointer',
-					'hover:bg-blue-600',
-					'p-2',
-					'rounded-md',
-					'text-white',
-					'text-sm',
-					'mt-5',
-					'text-center'
-				)}
-				onClick={handleSubmit}
-			>
-				Submit
-			</div>
+			{!submitHidden && (
+				<div
+					data-testid={`${testId}-submit-btn`}
+					className={clsx(
+						'bg-blue-500',
+						'cursor-pointer',
+						'hover:bg-blue-600',
+						'p-2',
+						'rounded-md',
+						'text-white',
+						'text-sm',
+						'mt-5',
+						'text-center'
+					)}
+					onClick={handleSubmit}
+				>
+					Submit
+				</div>
+			)}
 		</div>
 	);
 }

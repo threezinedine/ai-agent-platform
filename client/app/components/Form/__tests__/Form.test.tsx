@@ -308,4 +308,16 @@ describe('Form Testing', () => {
 			HTMLDivElement
 		);
 	});
+
+	it('should not display submit button when submit button is hidden', () => {
+		render(
+			<Form
+				name="Test Form"
+				testId="test-form"
+				submitHidden
+			/>
+		);
+
+		expect(screen.queryByTestId('test-form-submit-btn')).toBeNull();
+	});
 });

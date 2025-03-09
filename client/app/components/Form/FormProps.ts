@@ -17,6 +17,7 @@ export default interface FormProps {
 	submitFunc?: (data: { [key: string]: string }) => void;
 	inputs?: InputProps[];
 	className?: string;
+	submitHidden?: boolean;
 }
 
 export type { InputProps, Validator };
