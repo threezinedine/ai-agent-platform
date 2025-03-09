@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Button from './Button';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const meta: Meta<typeof Button> = {
 	component: Button,
@@ -127,5 +129,21 @@ export const FullWidth: Story = {
 	args: {
 		...Default.args,
 		fullWidth: true,
+	},
+};
+
+export const WithLeftIcon: Story = {
+	args: {
+		...Default.args,
+		icon: <FontAwesomeIcon icon={faCheck} />,
+		iconPosition: 'left',
+	},
+};
+
+export const WithRightIcon: Story = {
+	args: {
+		...Default.args,
+		icon: <FontAwesomeIcon icon={faCheck} />,
+		iconPosition: 'right',
 	},
 };

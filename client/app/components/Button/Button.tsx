@@ -18,6 +18,8 @@ interface ButtonProps {
 	secondary?: boolean;
 	fullWidth?: boolean;
 	rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+	icon?: React.ReactNode | null;
+	iconPosition?: 'left' | 'right';
 	size?: 'sm' | 'md' | 'lg';
 	disabled?: boolean;
 }
@@ -32,6 +34,8 @@ const Button: React.FC<ButtonProps> = ({
 	className,
 	disabled = false,
 	rounded = 'md',
+	icon = null,
+	iconPosition = 'left',
 }) => {
 	const sizeStyles = {
 		sm: clsx('text-sm', 'px-3', 'py-1.5'),
@@ -177,7 +181,13 @@ const Button: React.FC<ButtonProps> = ({
 			{...(testId ? { 'data-testid': testId } : {})}
 			onClick={handleClick}
 		>
+			{icon && iconPosition === 'left' && (
+				<div className={clsx('mr-2')}>{icon}</div>
+			)}
 			{text}
+			{icon && iconPosition === 'right' && (
+				<div className={clsx('ml-2')}>{icon}</div>
+			)}
 		</div>
 	);
 };
