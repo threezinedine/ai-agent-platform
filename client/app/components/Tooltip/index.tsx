@@ -109,8 +109,16 @@ export default function Tooltip({
 	useEffect(() => {
 		if (isVisible && targetRef.current && tooltipRef.current) {
 			updatePosition();
+			window.addEventListener('resize', updatePosition);
+			window.addEventListener('scroll', updatePosition);
+
+			return () => {
+				window.removeEventListener('resize', updatePosition);
+				window.removeEventListener('scroll', updatePosition);
+			};
 		}
-	});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isVisible, position]);
 
 	const updatePosition = () => {
 		const targetRect = targetRef.current?.getBoundingClientRect();
