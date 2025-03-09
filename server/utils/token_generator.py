@@ -17,8 +17,8 @@ class TokenGeneratorData:
     password: str
 
 
-def generate_token(data: TokenGeneratorData) -> str:
-    return json.dumps(asdict(data))
+def generate_token(data: TokenGeneratorData) -> Tuple[str, str]:
+    return json.dumps(asdict(data)), json.dumps(asdict(data))
 
 
 def validate_token(token: str) -> Union[TokenGeneratorError, TokenGeneratorData]:

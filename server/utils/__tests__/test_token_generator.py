@@ -8,9 +8,12 @@ def test_generate_token():
         password="test-generate-token-password",
     )
 
-    token = generate_token(user)
-    assert token is not None
-    assert isinstance(token, str)
+    access_token, refresher_token = generate_token(user)
+    assert access_token is not None
+    assert isinstance(access_token, str)
+
+    assert refresher_token is not None
+    assert isinstance(refresher_token, str)
 
 
 def test_validate_valid_token():
@@ -19,9 +22,9 @@ def test_validate_valid_token():
         password="test-validate-valid-token-password",
     )
 
-    token = generate_token(user)
+    access_token, _ = generate_token(user)
 
-    validated_user = validate_token(token)
+    validated_user = validate_token(access_token)
 
     assert validated_user is not None
     assert isinstance(validated_user, TokenGeneratorData)

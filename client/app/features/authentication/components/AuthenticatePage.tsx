@@ -37,7 +37,7 @@ export default function AuthenticatePage({
 	}, [loading]);
 
 	function onLogout() {
-		Storage.RemoveItem('token');
+		Storage.RemoveItem('accessToken');
 	}
 
 	return (

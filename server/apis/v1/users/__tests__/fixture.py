@@ -11,7 +11,8 @@ def create_and_login_user(client: TestClient, username: str, password: str) -> s
         password (str): password
 
     Returns:
-        str: token of the user
+        str: access token of the user
+        str: refresh token of the user
     """
 
     client.post(
@@ -30,4 +31,4 @@ def create_and_login_user(client: TestClient, username: str, password: str) -> s
         },
     )
 
-    return response.json()["token"]
+    return response.json()["accessToken"], response.json()["refreshToken"]

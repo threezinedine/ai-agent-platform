@@ -19,7 +19,11 @@ export default function LoginForm() {
 		try {
 			const response = await authenRequest.login(username, password);
 			if (response.isSuccess()) {
-				Storage.SetItem('token', response.getData()?.token);
+				Storage.SetItem('accessToken', response.getData()?.accessToken);
+				Storage.SetItem(
+					'refreshToken',
+					response.getData()?.refreshToken
+				);
 				router.push('/dashboard');
 				ToastService.getInstance().addToastMessage({
 					message: 'Login successfully',

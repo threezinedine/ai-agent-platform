@@ -6,7 +6,8 @@ export interface UserInfo {
 }
 
 export interface LoginResponse {
-	token: string;
+	accessToken: string;
+	refreshToken: string;
 	user: UserInfo;
 }
 

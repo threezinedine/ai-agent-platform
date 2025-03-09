@@ -13,7 +13,7 @@ export default function useAuth() {
 
 	useEffect(() => {
 		(async () => {
-			const token = await Storage.GetItem('token', '');
+			const token = await Storage.GetItem('accessToken', '');
 			if (token !== '') {
 				setIsAuthorized(true);
 			}

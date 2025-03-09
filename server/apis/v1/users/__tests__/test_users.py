@@ -58,7 +58,8 @@ class UserTest(unittest.TestCase):
         self.assertEqual(response.status_code, HTTP_200_OK)
 
         response_json = response.json()
-        self.assertTrue("token" in response_json)
+        self.assertTrue("accessToken" in response_json)
+        self.assertTrue("refreshToken" in response_json)
         self.assertTrue("user" in response_json)
 
         user_info = response_json["user"]
@@ -116,11 +117,11 @@ class UserTest(unittest.TestCase):
         username = "test-get-user-info-username"
         password = "test-get-user-info-password"
 
-        token = create_and_login_user(self.client, username, password)
+        access_token, _ = create_and_login_user(self.client, username, password)
 
         response = self.client.get(
             "/api/v1/users/me",
-            headers={"Authorization": token},
+            headers={"Authorization": access_token},
         )
 
         self.assertEqual(response.status_code, HTTP_200_OK)
@@ -147,7 +148,7 @@ class UserTest(unittest.TestCase):
         new_full_name = "Test Update With Valid Token"
         new_email = "test-update-with-valid-token@gmail.com"
 
-        token = create_and_login_user(self.client, username, password)
+        access_token, _ = create_and_login_user(self.client, username, password)
 
         response = self.client.put(
             "/api/v1/users/me",
@@ -157,7 +158,7 @@ class UserTest(unittest.TestCase):
                 "fullName": new_full_name,
                 "email": new_email,
             },
-            headers={"Authorization": token},
+            headers={"Authorization": access_token},
         )
 
         self.assertEqual(response.status_code, HTTP_200_OK)
@@ -172,11 +173,11 @@ class UserTest(unittest.TestCase):
         username = "test-get-avatar-username"
         password = "test-get-avatar-password"
 
-        token = create_and_login_user(self.client, username, password)
+        access_token, _ = create_and_login_user(self.client, username, password)
 
         response = self.client.get(
             "/api/v1/users/avatar",
-            headers={"Authorization": token},
+            headers={"Authorization": access_token},
         )
 
         self.assertEqual(response.status_code, HTTP_200_OK)
@@ -186,21 +187,21 @@ class UserTest(unittest.TestCase):
         username = "test-update-avatar-username"
         password = "test-update-avatar-password"
 
-        token = create_and_login_user(self.client, username, password)
+        access_token, _ = create_and_login_user(self.client, username, password)
 
         with open("assets/test-ava.png", "rb") as f:
             content = f.read()
             response = self.client.put(
                 "/api/v1/users/avatar",
                 files={"avatar": ("test.png", f, "image/png")},
-                headers={"Authorization": token},
+                headers={"Authorization": access_token},
             )
 
         self.assertEqual(response.status_code, HTTP_200_OK)
 
         response = self.client.get(
             "/api/v1/users/avatar",
-            headers={"Authorization": token},
+            headers={"Authorization": access_token},
         )
 
         self.assertEqual(response.status_code, HTTP_200_OK)

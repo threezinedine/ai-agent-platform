@@ -7,16 +7,19 @@ class UserInfo(BaseModel):
     username: str
     email: Optional[str] = None
     fullName: Optional[str] = None
+    phone: Optional[str] = None
 
 
 class LoginResponse(BaseModel):
-    token: str
+    accessToken: str
+    refreshToken: str
     user: UserInfo
 
 
 class UpdateUserInfo(BaseModel):
     fullName: Optional[str] = None
     email: Optional[str] = None
+    phone: Optional[str] = None
 
 
 class UserLoginInfo(BaseModel):

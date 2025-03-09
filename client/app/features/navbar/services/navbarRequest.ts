@@ -7,7 +7,7 @@ export default class NavbarRequest {
 	);
 
 	async getAvatar(): Promise<Response<string>> {
-		const token: string = await Storage.GetItem('token', '');
+		const token: string = await Storage.GetItem('accessToken', '');
 
 		return this.httpRequest.getImage('/users/avatar', token);
 	}

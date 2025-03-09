@@ -12,6 +12,7 @@ class User(SQLModel, table=True):
     fullName: str = Field(nullable=True)
     hashedPassword: str = Field(max_length=100)
     avatarUrl: str = Field(nullable=True)
+    phone: str = Field(nullable=True)
     verified: bool = Field(default=False)
     createdAt: datetime = Field(default=datetime.now())
 
@@ -30,6 +31,8 @@ class User(SQLModel, table=True):
             self.fullName = user_info.fullName
         if user_info.email:
             self.email = user_info.email
+        if user_info.phone:
+            self.phone = user_info.phone
 
     def RemoveAvatar(self) -> None:
         self.avatarUrl = os.path.join(os.environ["AVATAR_FOLDER_DIR"], "default.png")

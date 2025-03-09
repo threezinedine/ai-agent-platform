@@ -6,7 +6,7 @@ from models import *
 from sqlmodel import select
 from constants import *
 from .get_user_depend import ScopeDependency
-from utils import *
+from utils import generate_token, TokenGeneratorError, TokenGeneratorData
 from dotenv import load_dotenv
 
 router = APIRouter(prefix="/api/v1/users", tags=["users", "authenticate"])
@@ -43,13 +43,16 @@ def login_user(
             detail="Invalid password",
         )
 
+    access_token, refresher_token = generate_token(
+        TokenGeneratorData(
+            user.username,
+            password=user.hashedPassword,
+        )
+    )
+
     return LoginResponse(
-        token=generate_token(
-            TokenGeneratorData(
-                user.username,
-                password=user.hashedPassword,
-            )
-        ),
+        accessToken=access_token,
+        refreshToken=refresher_token,
         user=UserInfo(
             id=user.id,
             username=user.username,
