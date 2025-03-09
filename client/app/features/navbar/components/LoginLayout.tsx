@@ -1,5 +1,7 @@
 import React from 'react';
 import LoginNavbar from './LoginNavbar';
+import Footer from './Footer';
+import clsx from 'clsx';
 
 export default function LoginLayout({
 	children,
@@ -9,7 +11,16 @@ export default function LoginLayout({
 	return (
 		<div>
 			<LoginNavbar />
-			{children}
+			<div
+				className={clsx(
+					'min-h-screen',
+					'bg-gray-100',
+					'dark:bg-gray-800'
+				)}
+			>
+				{children}
+			</div>
+			<Footer />
 		</div>
 	);
 }

@@ -7,6 +7,7 @@ import AuthenRequest from '../services/authRequest';
 import Storage from '@/app/utils/storage';
 import { useRouter } from 'next/navigation';
 import { ToastService } from '@/app/features/toast';
+import Button from '@/app/components/Button';
 
 export default function LoginForm() {
 	const authenRequest = new AuthenRequest();
@@ -38,6 +39,19 @@ export default function LoginForm() {
 			testId="login-form"
 			className={clsx('w-1/3')}
 			submitFunc={handleSubmit}
+			footer={
+				<div>
+					<p>
+						Do not have an account?
+						<Button
+							variant="link"
+							text="Register"
+							size="sm"
+							onClick={() => router.push('/register')}
+						/>
+					</p>
+				</div>
+			}
 			inputs={[
 				{
 					testId: 'username',

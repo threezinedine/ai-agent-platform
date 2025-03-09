@@ -15,11 +15,14 @@ export const Default: Story = {
 		testId: 'test-form',
 		name: 'Test Form',
 		className: 'w-1/2',
+		description: 'This is a test form',
+		footer: <div>This is footer</div>,
 		submitFunc: () => {},
 		inputs: [
 			{
 				testId: 'surname',
 				title: 'Surname',
+				required: true,
 				validators: [
 					{
 						validate: (value: string) => value.length > 0,
@@ -30,6 +33,7 @@ export const Default: Story = {
 			{
 				testId: 'lastname',
 				title: 'Lastname',
+				required: true,
 				placeholder: 'Enter your lastname',
 				validators: [
 					{
@@ -37,6 +41,12 @@ export const Default: Story = {
 						message: 'Lastname is required',
 					},
 				],
+			},
+			{
+				testId: 'readonly',
+				title: 'Readonly',
+				disabled: true,
+				defaultValue: 'Readonly value',
 			},
 		],
 	},

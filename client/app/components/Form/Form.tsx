@@ -1,6 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import FormProps, { Validator } from './FormProps';
 import clsx from 'clsx';
+import Button from '@/app/components/Button';
 
 interface InputData {
 	value: string;
@@ -17,7 +18,10 @@ const Form = forwardRef(
 			submitFunc,
 			inputs = [],
 			className = '',
+			description = null,
+			footer = null,
 			submitHidden = false,
+			shadowDisabled = false,
 		}: FormProps,
 		ref: React.Ref<{ submit: () => void }>
 	) => {
@@ -34,7 +38,7 @@ const Form = forwardRef(
 		const [inputData, setInputData] = React.useState<InputDataDict>(
 			inputs.reduce((acc, input) => {
 				acc[input.testId] = {
-					value: '',
+					value: input.defaultValue || '',
 					error: null,
 				};
 
@@ -108,32 +112,72 @@ const Form = forwardRef(
 		return (
 			<div
 				data-testid={testId}
-				className={clsx('select-none', className)}
+				className={clsx(
+					'select-none',
+					'w-full',
+					'max-w-md',
+					'mx-auto',
+					'p-6',
+					'md:p-8',
+					'bg-white',
+					'dark:bg-gray-800',
+					'rounded-2xl',
+					{ 'shadow-lg': !shadowDisabled },
+					'transition-all',
+					'duration-300',
+					className
+				)}
 			>
-				<div
-					className={clsx(
-						'text-slate-500',
-						'text-lg',
-						'font-semibold',
-						'mb-5',
-						'text-center'
+				<div className={clsx('mb-8')}>
+					<h2
+						className={clsx(
+							'text-2xl',
+							'font-bold',
+							'text-gray-800',
+							'dark:text-white',
+							'mb-2',
+							'text-center'
+						)}
+					>
+						{name}
+					</h2>
+					{description && (
+						<p
+							className={clsx(
+								'text-gray-600',
+								'dark:text-gray-300',
+								'text-center'
+							)}
+						>
+							{description}
+						</p>
 					)}
-				>
-					{name}
 				</div>
-				<div>
+				<div className={clsx('space-y-6')}>
 					{inputs.map((input) => (
-						<div key={input.testId}>
+						<div
+							key={input.testId}
+							className={clsx('space-y-2')}
+						>
 							<label
 								htmlFor={input.testId}
 								className={clsx(
-									'text-slate-500',
+									'block',
 									'text-sm',
-									'mt-2',
-									'block'
+									'font-medium',
+									'text-gray-700',
+									'dark:text-gray-300',
+									'mt-2'
 								)}
 							>
 								{input.title || input.testId}
+								{input.required && (
+									<span
+										className={clsx('ml-1', 'text-red-300')}
+									>
+										*
+									</span>
+								)}
 							</label>
 							<input
 								data-testid={input.testId}
@@ -141,19 +185,49 @@ const Form = forwardRef(
 								type={input.type || 'text'}
 								value={inputData[input.testId].value}
 								className={clsx(
+									'w-full',
+									'px-4',
+									'py-3',
+									'rounded-lg',
 									'border',
-									'border-gray-300',
-									'italic',
-									'text-slate-400',
-									'placeholder-slate-200',
+									inputData[input.testId].error
+										? clsx(
+												'border-red-500',
+												'dark:border-red-400',
+												'bg-red-50',
+												'dark:bg-red-900/10'
+										  )
+										: clsx(
+												'border-gray-300',
+												'dark:border-gray-600',
+												'bg-white',
+												'dark:bg-gray-700'
+										  ),
 									'focus:outline-none',
 									'focus:ring-2',
-									'focus:ring-blue-200',
-									'px-2',
-									'py-1',
-									'mt-1',
-									'rounded-md',
-									'w-full'
+									'focus:border-transparent',
+									inputData[input.testId].error
+										? clsx(
+												'focus:ring-red-500/50',
+												'dark:focus:ring-red-500/50'
+										  )
+										: clsx(
+												'focus:ring-indigo-500/50',
+												'dark:focus:ring-indigo-500/50'
+										  ),
+									'transition-all',
+									'duration-300',
+									'text-gray-900',
+									'dark:text-white',
+									'placeholder-gray-400',
+									'dark:placeholder-gray-500',
+									input.disabled
+										? clsx(
+												'bg-gray-100',
+												'dark:bg-gray-800',
+												'cursor-not-allowed'
+										  )
+										: clsx()
 								)}
 								placeholder={
 									input.placeholder || 'Enter this field'
@@ -167,6 +241,7 @@ const Form = forwardRef(
 										inputData[input.testId].value
 									)
 								}
+								readOnly={input.disabled ? true : undefined}
 							/>
 							{inputData[input.testId].error && (
 								<div
@@ -183,22 +258,26 @@ const Form = forwardRef(
 					))}
 				</div>
 				{!submitHidden && (
-					<div
-						data-testid={`${testId}-submit-btn`}
-						className={clsx(
-							'bg-blue-500',
-							'cursor-pointer',
-							'hover:bg-blue-600',
-							'p-2',
-							'rounded-md',
-							'text-white',
-							'text-sm',
-							'mt-5',
-							'text-center'
-						)}
+					<Button
+						testId={`${testId}-submit-btn`}
+						text="Submit"
 						onClick={handleSubmit}
+						variant="secondary"
+						className={clsx('mt-5')}
+						fullWidth
+					/>
+				)}
+				{footer && (
+					<div
+						className={clsx(
+							'mt-4',
+							'text-center',
+							'text-xs',
+							'text-gray-500',
+							'dark:text-gray-400'
+						)}
 					>
-						Submit
+						{footer}
 					</div>
 				)}
 			</div>

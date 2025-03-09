@@ -14,7 +14,8 @@ interface ButtonProps {
 		| 'danger'
 		| 'outline'
 		| 'subtle'
-		| 'ghost';
+		| 'ghost'
+		| 'link';
 	secondary?: boolean;
 	fullWidth?: boolean;
 	rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';

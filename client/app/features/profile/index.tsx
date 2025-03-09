@@ -92,6 +92,7 @@ export default function ProfilePageComponent() {
 						<Form
 							ref={formRef}
 							testId="profile"
+							shadowDisabled
 							name="Profile"
 							inputs={[
 								{
@@ -112,8 +113,14 @@ export default function ProfilePageComponent() {
 					</div>
 					<div className={clsx('pt-5')}>
 						<div className={clsx('flex', 'justify-end', 'gap-3')}>
-							<Button text="Cancel" />
-							<Button text="Submit" />
+							<Button
+								text="Cancel"
+								variant="subtle"
+							/>
+							<Button
+								text="Submit"
+								variant="primary"
+							/>
 						</div>
 					</div>
 				</div>

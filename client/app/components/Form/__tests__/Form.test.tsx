@@ -14,7 +14,9 @@ describe('Form Testing', () => {
 		);
 
 		expect(screen.getByTestId('test-form')).toBeInstanceOf(HTMLDivElement);
-		expect(screen.getByText('Test Form')).toBeInstanceOf(HTMLDivElement);
+		expect(screen.getByText('Test Form')).toBeInstanceOf(
+			HTMLHeadingElement
+		);
 	});
 
 	it('should render a form with given inputs', () => {
@@ -33,7 +35,9 @@ describe('Form Testing', () => {
 		);
 
 		expect(screen.getByTestId('test-form')).toBeInstanceOf(HTMLDivElement);
-		expect(screen.getByText('Test Form')).toBeInstanceOf(HTMLDivElement);
+		expect(screen.getByText('Test Form')).toBeInstanceOf(
+			HTMLHeadingElement
+		);
 		expect(screen.getByTestId('test-input-1')).toBeInstanceOf(
 			HTMLInputElement
 		);

@@ -68,6 +68,12 @@ export const Ghost: Story = {
 		variant: 'ghost',
 	},
 };
+export const Link: Story = {
+	args: {
+		...Default.args,
+		variant: 'link',
+	},
+};
 
 export const Disabled: Story = {
 	args: {
