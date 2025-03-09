@@ -136,7 +136,10 @@ export default function Modal({
 								'p-6',
 								'bg-white',
 								'dark:bg-gray-800',
-								'rounded-t-xl'
+								'rounded-t-xl',
+								{
+									'rounded-b-xl': actions.length === 0,
+								}
 							)}
 						>
 							<div
@@ -158,7 +161,8 @@ export default function Modal({
 								'dark:bg-gray-700',
 								'px-6',
 								'py-4',
-								'rounded-b-xl'
+								'rounded-b-xl',
+								{ hidden: actions.length === 0 }
 							)}
 						>
 							<div className={clsx('flex', 'justify-end')}>
