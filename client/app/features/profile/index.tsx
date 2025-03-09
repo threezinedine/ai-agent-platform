@@ -1,12 +1,16 @@
 'use client';
 
 import clsx from 'clsx';
-import ProfileForm from './components/ProfileForm';
+import Form from '@/app/components/Form';
 import SocialLink from './components/SocialLink';
 import FontAwesomeIcon from '@/app/components/FontAwesomeIcon';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { useRef } from 'react';
+import Button from '@/app/components/Button';
 
 export default function ProfilePageComponent() {
+	const formRef = useRef(null);
+
 	return (
 		<div
 			className={clsx(
@@ -16,7 +20,8 @@ export default function ProfilePageComponent() {
 				'py-12',
 				'px-4',
 				'sm:px-6',
-				'lg:px-8'
+				'lg:px-8',
+				'select-none'
 			)}
 		>
 			<div className={clsx('max-w-6xl', 'mx-auto', 'select-none')}>
@@ -48,7 +53,8 @@ export default function ProfilePageComponent() {
 					'dark:bg-gray-800',
 					'rounded-xl',
 					'shadow-lg',
-					'overflow-hidden'
+					'overflow-hidden',
+					'flex'
 				)}
 			>
 				<div
@@ -81,8 +87,37 @@ export default function ProfilePageComponent() {
 						</div>
 					</div>
 				</div>
+				<div className={clsx('md:w-2/3', 'p-8')}>
+					<div className={clsx('p-8')}>
+						<Form
+							ref={formRef}
+							testId="profile"
+							name="Profile"
+							inputs={[
+								{
+									type: 'text',
+									title: 'Username',
+									testId: 'profile-username',
+									placeholder: 'Enter the username',
+								},
+								{
+									type: 'email',
+									title: 'Email',
+									testId: 'profile-email',
+									placeholder: 'Enter the email',
+								},
+							]}
+							submitHidden
+						/>
+					</div>
+					<div className={clsx('pt-5')}>
+						<div className={clsx('flex', 'justify-end', 'gap-3')}>
+							<Button text="Cancel" />
+							<Button text="Submit" />
+						</div>
+					</div>
+				</div>
 			</div>
-			<ProfileForm />
 		</div>
 	);
 }
