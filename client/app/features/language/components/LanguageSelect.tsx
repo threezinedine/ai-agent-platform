@@ -8,21 +8,17 @@ import Tooltip from '@/app/components/Tooltip';
 import Storage from '@/app/utils/storage';
 import { ToastService } from '@/app/features/toast';
 import * as languageConstants from '../data/constants';
+import useLang from '../contexts/LanguageContext';
 
 export default function LanguageSelect() {
 	const [language, setLanguage] = React.useState(
 		languageConstants.LANGUAGE_EN
 	);
+	const { t, lang, changeLanguage } = useLang();
 
 	useEffect(() => {
-		(async () => {
-			const lang = await Storage.GetItem(
-				languageConstants.LANGUAGE_KEY,
-				languageConstants.LANGUAGE_EN
-			);
-			setLanguage(lang);
-		})();
-	}, []);
+		setLanguage(lang);
+	}, [lang]);
 
 	const handleLanguageChange = async (lang: string) => {
 		await Storage.SetItem(languageConstants.LANGUAGE_KEY, lang);
@@ -34,6 +30,7 @@ export default function LanguageSelect() {
 			duration: 3000,
 		});
 		setLanguage(lang);
+		changeLanguage(lang as languageConstants.Language);
 	};
 
 	return (
@@ -41,7 +38,7 @@ export default function LanguageSelect() {
 			testId="language-selection"
 			triggerNode={
 				<Tooltip
-					tooltip={<div>Change Language</div>}
+					tooltip={<div>{t('CHANGE_LANGUAGE')}</div>}
 					position="bottom"
 				>
 					<div

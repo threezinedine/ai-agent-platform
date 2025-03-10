@@ -1,21 +1,29 @@
+'use client';
+
 import '@/app/assets/globals.css';
 import Toast from './features/toast';
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-	title: 'AI Agent Platform',
-	description: 'An open-source project for building AI agents',
-	icons: {
-		icon: '/favicon.ico', // Place this file in the public directory
-		shortcut: '/b-logo.svg',
-	},
-};
+import { useEffect } from 'react';
+import { languageConstants, useLang } from '@/app/features/language';
+import Storage from '@/app/utils/storage';
 
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const { changeLanguage } = useLang();
+
+	useEffect(() => {
+		(async () => {
+			const lang = await Storage.GetItem(
+				languageConstants.LANGUAGE_KEY,
+				languageConstants.LANGUAGE_EN
+			);
+			changeLanguage(lang as languageConstants.Language);
+		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<html lang="en">
 			<body>

@@ -9,10 +9,12 @@ import { useRouter } from 'next/navigation';
 import { ToastService } from '@/app/features/toast';
 import Button from '@/app/components/Button';
 import * as constants from '../data/constants';
+import { useLang } from '@/app/features/language';
 
 export default function LoginForm() {
 	const authenRequest = new AuthenRequest();
 	const router = useRouter();
+	const { t } = useLang();
 
 	async function handleSubmit(data: { [key: string]: string }) {
 		const { username, password } = data;
@@ -30,7 +32,7 @@ export default function LoginForm() {
 				);
 				router.push('/dashboard');
 				ToastService.getInstance().addToastMessage({
-					message: 'Login successfully',
+					message: t('LOGIN_SUCCESSFULLY'),
 					type: 'success',
 				});
 			} else {
@@ -43,16 +45,16 @@ export default function LoginForm() {
 
 	return (
 		<Form
-			name="Login Form"
+			name={t('LOGIN')}
 			testId="login-form"
 			className={clsx('w-1/3')}
 			submitFunc={handleSubmit}
 			footer={
 				<div>
-					Do not have an account?
+					{t('DO_NOT_HAVE_AN_ACCOUNT')}{' '}
 					<Button
 						variant="link"
-						text="Register"
+						text={t('REGISTER')}
 						size="sm"
 						onClick={() => router.push('/register')}
 					/>
@@ -61,7 +63,7 @@ export default function LoginForm() {
 			inputs={[
 				{
 					testId: 'username',
-					title: 'Username',
+					title: t('USERNAME'),
 					validators: [
 						{
 							validate: (value: string) => value.length > 0,
@@ -71,7 +73,7 @@ export default function LoginForm() {
 				},
 				{
 					testId: 'password',
-					title: 'Password',
+					title: t('PASSWORD'),
 					type: 'password',
 					validators: [
 						{

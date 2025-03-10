@@ -6,10 +6,12 @@ import clsx from 'clsx';
 import AuthenRequest from '../services/authRequest';
 import Button from '@/app/components/Button';
 import { useRouter } from 'next/navigation';
+import { useLang } from '@/app/features/language';
 
 export default function RegisterForm() {
 	const authenRequest = new AuthenRequest();
 	const router = useRouter();
+	const { t } = useLang();
 
 	async function handleSubmit(data: { [key: string]: string }) {
 		const { username, password } = data;
@@ -27,16 +29,16 @@ export default function RegisterForm() {
 
 	return (
 		<Form
-			name="Register Form"
+			name={t('REGISTER')}
 			testId="register-form"
 			className={clsx('w-1/3')}
 			submitFunc={handleSubmit}
 			footer={
 				<div>
-					Already have an account?
+					{t('ALREADY_HAVE_AN_ACCOUNT')}{' '}
 					<Button
 						variant="link"
-						text="Login"
+						text={t('LOGIN')}
 						size="sm"
 						onClick={() => router.push('/login')}
 					/>
@@ -45,7 +47,7 @@ export default function RegisterForm() {
 			inputs={[
 				{
 					testId: 'username',
-					title: 'Username',
+					title: t('USERNAME'),
 					validators: [
 						{
 							validate: (value: string) => value.length > 0,
@@ -60,7 +62,7 @@ export default function RegisterForm() {
 				},
 				{
 					testId: 'password',
-					title: 'Password',
+					title: t('PASSWORD'),
 					type: 'password',
 					validators: [
 						{
@@ -76,7 +78,7 @@ export default function RegisterForm() {
 				},
 				{
 					testId: 'confirm-password',
-					title: 'Confirm Password',
+					title: t('CONFIRM_PASSWORD'),
 					type: 'password',
 					validators: [
 						{

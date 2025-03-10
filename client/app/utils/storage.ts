@@ -5,7 +5,9 @@ class Storage {
 		if (!item) {
 			return Promise.resolve(defaultValue);
 		}
-
+		if (typeof defaultValue === 'string') {
+			return Promise.resolve(item as T);
+		}
 		return Promise.resolve(JSON.parse(item));
 	}
 

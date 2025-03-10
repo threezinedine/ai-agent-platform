@@ -24,6 +24,7 @@ def generate_token(data: TokenGeneratorData) -> Tuple[str, str]:
 def validate_token(token: str) -> Union[TokenGeneratorError, TokenGeneratorData]:
     try:
         data = json.loads(token)
-        return TokenGeneratorData(**data)
+        print(json.loads(data))
+        return TokenGeneratorData(**json.loads(data))
     except json.JSONDecodeError:
         return TokenGeneratorError.INVALID
