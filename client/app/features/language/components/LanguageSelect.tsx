@@ -22,15 +22,16 @@ export default function LanguageSelect() {
 
 	const handleLanguageChange = async (lang: string) => {
 		await Storage.SetItem(languageConstants.LANGUAGE_KEY, lang);
+		setLanguage(lang);
+		changeLanguage(lang as languageConstants.Language);
 		ToastService.getInstance().addToastMessage({
-			message: `Language changed to "${
-				lang == languageConstants.LANGUAGE_EN ? 'English' : 'Vietnamese'
-			}"`,
+			message:
+				lang === languageConstants.LANGUAGE_EN
+					? t('CHANGE_LANGUAGE_TO_EN')
+					: t('CHANGE_LANGUAGE_TO_VI'),
 			type: 'success',
 			duration: 3000,
 		});
-		setLanguage(lang);
-		changeLanguage(lang as languageConstants.Language);
 	};
 
 	return (
@@ -78,7 +79,7 @@ export default function LanguageSelect() {
 						width={16}
 						height={16}
 					/>
-					<span className={clsx('ml-4')}>English</span>
+					<span className={clsx('ml-4')}>{t('ENGLISH')}</span>
 				</div>
 			</ToggleItem>
 			<ToggleItem
@@ -92,7 +93,7 @@ export default function LanguageSelect() {
 						width={16}
 						height={16}
 					/>
-					<span className={clsx('ml-4')}>Vietnamese</span>
+					<span className={clsx('ml-4')}>{t('VIETNAMESE')}</span>
 				</div>
 			</ToggleItem>
 		</ToggleMenu>

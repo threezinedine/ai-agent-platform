@@ -5,9 +5,10 @@ from schemas.users import *
 from models import *
 from sqlmodel import select
 from constants import *
-from middlewares.get_user_depend import ScopeDependency
+from middlewares import ScopeDependency, LanguageDependency
 from utils import generate_token, TokenGeneratorError, TokenGeneratorData
 from dotenv import load_dotenv
+from utils import LanguageService
 
 router = APIRouter(prefix="/api/v1/users", tags=["users", "authenticate"])
 
@@ -28,19 +29,20 @@ def register_new_user(
 def login_user(
     user_info: UserLoginInfo,
     session: SessionDependency,
+    language: str = LanguageDependency,
 ) -> LoginResponse:
     user = session.exec(select(User).where(User.username == user_info.username)).first()
 
     if not user:
         raise HTTPException(
             status_code=HTTP_404_NOT_FOUND,
-            detail="User not found",
+            detail=LanguageService.Get("USER_NOT_FOUND", language),
         )
 
     if not user.CheckPassword(user_info.password):
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,
-            detail="Invalid password",
+            detail=LanguageService.Get("INVALID_PASSWORD", language),
         )
 
     access_token, refresher_token = generate_token(
@@ -74,11 +76,12 @@ def update_user_info(
     user_info: UpdateUserInfo,
     session: SessionDependency,
     user: User = ScopeDependency,
+    language: str = LanguageDependency,
 ) -> UserInfo:
     if user is None:
         raise HTTPException(
             status_code=HTTP_404_NOT_FOUND,
-            detail="User not found",
+            detail=LanguageService.Get("USER_NOT_FOUND", language),
         )
 
     user.Update(user_info)
@@ -90,11 +93,12 @@ def update_user_info(
 def get_avatar(
     session: SessionDependency,
     user: User = ScopeDependency,
+    language: str = LanguageDependency,
 ) -> FileResponse:
     if user is None:
         raise HTTPException(
             status_code=HTTP_404_NOT_FOUND,
-            detail="User not found",
+            detail=LanguageService.Get("USER_NOT_FOUND", language),
         )
 
     path = None
@@ -120,11 +124,12 @@ def set_avatar(
     session: SessionDependency,
     avatar: UploadFile = File(...),
     user: User = ScopeDependency,
+    language: str = LanguageDependency,
 ) -> str:
     if user is None:
         raise HTTPException(
             status_code=HTTP_404_NOT_FOUND,
-            detail="User not found",
+            detail=LanguageService.Get("USER_NOT_FOUND", language),
         )
 
     avatar_url = f"{user.username}-{avatar.filename}-avatar.png"

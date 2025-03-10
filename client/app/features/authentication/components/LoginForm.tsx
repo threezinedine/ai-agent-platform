@@ -37,6 +37,10 @@ export default function LoginForm() {
 				});
 			} else {
 				console.error(response.getMessage());
+				ToastService.getInstance().addToastMessage({
+					message: response.getMessage(),
+					type: 'error',
+				});
 			}
 		} catch (error) {
 			console.error(error);

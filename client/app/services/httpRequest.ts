@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { languageConstants } from '@/app/features/language';
 
 export class Response<T> {
 	private status: number;
@@ -26,13 +27,21 @@ export class Response<T> {
 
 class HttpRequest {
 	private baseUrl: string;
+	private static language: languageConstants.Language =
+		languageConstants.LANGUAGE_EN;
+
+	static setLanguage(language: languageConstants.Language): void {
+		HttpRequest.language = language;
+	}
 
 	constructor(baseUrl: string) {
 		this.baseUrl = baseUrl;
 	}
 
 	async get<T>(url: string, token: string = ''): Promise<Response<T>> {
-		const header = token ? { Authorization: token } : {};
+		const header = token
+			? { Authorization: token, language: HttpRequest.language }
+			: { language: HttpRequest.language };
 
 		try {
 			const response = await axios.get<T>(`${this.baseUrl}${url}`, {
@@ -40,6 +49,7 @@ class HttpRequest {
 			});
 			return new Response<T>(response.status, response.data, '');
 		} catch (error: unknown) {
+			console.log('error', error);
 			if (!axios.isAxiosError(error)) {
 				const axiosError = error as AxiosError;
 				return new Response<T>(
@@ -48,17 +58,27 @@ class HttpRequest {
 					axiosError.response
 						? (axiosError.response.data as { message: string })
 								.message
-						: 'An error occurred'
+						: HttpRequest.language == languageConstants.LANGUAGE_EN
+						? 'Unknown error 1'
+						: 'Lỗi không xác định'
 				);
 			} else {
-				return new Response<T>(1000, null, 'Unknown error');
+				return new Response<T>(
+					1000,
+					null,
+					HttpRequest.language == languageConstants.LANGUAGE_EN
+						? 'Unknown error 2'
+						: 'Lỗi không xác định'
+				);
 			}
 		}
 	}
 
 	async getImage(url: string, token: string = ''): Promise<Response<string>> {
 		url = `${this.baseUrl}${url}`;
-		const header = token ? { Authorization: token } : {};
+		const header = token
+			? { Authorization: token, language: HttpRequest.language }
+			: { language: HttpRequest.language };
 
 		try {
 			const response = await axios.get(url, {
@@ -94,9 +114,52 @@ class HttpRequest {
 		}
 	}
 
-	async post<K, T>(url: string, data: K): Promise<Response<T>> {
-		const response = await axios.post<T>(`${this.baseUrl}${url}`, data);
-		return new Response<T>(response.status, response.data, '');
+	async post<K, T>(
+		url: string,
+		data: K,
+		token: string = ''
+	): Promise<Response<T>> {
+		const header = token
+			? { Authorization: token, language: HttpRequest.language }
+			: { language: HttpRequest.language };
+
+		try {
+			const response = await axios.post<T>(
+				`${this.baseUrl}${url}`,
+				data,
+				{
+					headers: header,
+				}
+			);
+			return new Response<T>(response.status, response.data, '');
+		} catch (error: unknown) {
+			if (axios.isAxiosError(error)) {
+				const axiosError = error as AxiosError;
+				console.log(
+					'error',
+					error,
+					(axiosError.response?.data as { detail: string })?.detail
+				);
+				return new Response<T>(
+					axiosError.response ? axiosError.response.status : 500,
+					null,
+					axiosError.response
+						? (axiosError.response.data as { detail: string })
+								.detail
+						: HttpRequest.language == languageConstants.LANGUAGE_EN
+						? 'Unknown error 3'
+						: 'Lỗi không xác định'
+				);
+			} else {
+				return new Response<T>(
+					1000,
+					null,
+					HttpRequest.language == languageConstants.LANGUAGE_EN
+						? 'Unknown error 4'
+						: 'Lỗi không xác định'
+				);
+			}
+		}
 	}
 }
 

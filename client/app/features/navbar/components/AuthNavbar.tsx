@@ -13,12 +13,14 @@ import {
 import UserAvatar from '@/app/components/UserAvatar';
 import NavbarRequest from '../services/navbarRequest';
 import NavbarSepartor from './NavbarSeparator';
+import { useLang } from '@/app/features/language';
 
 function AuthNavbar() {
 	const { user, logout } = useContext(AuthContext);
 	const router = useRouter();
 	const navbarRequest = new NavbarRequest();
 	const [avatarUrl, setAvatarUrl] = React.useState<string | null>(null);
+	const { t } = useLang();
 
 	useEffect(() => {
 		(async () => {
@@ -34,9 +36,9 @@ function AuthNavbar() {
 		logout();
 		router.push('/');
 		ToastService.getInstance().addToastMessage({
-			message: 'Logged out successfully',
+			message: t('LOG_OUT_SUCCESSFULLY'),
 			type: 'success',
-			duration: 10000,
+			duration: 1000,
 		});
 	}
 
@@ -55,10 +57,10 @@ function AuthNavbar() {
 				}
 			>
 				<ToggleItem onClick={() => router.push('/dashboard')}>
-					Dashboard
+					{t('DASHBOARD')}
 				</ToggleItem>
 				<ToggleItem onClick={() => router.push('/profile')}>
-					Profile
+					{t('PROFILE')}
 				</ToggleItem>
 				<ToggleMenuSeparator />
 				<ToggleItem
@@ -66,7 +68,7 @@ function AuthNavbar() {
 					testId="logout"
 					className="text-red-500"
 				>
-					Logout
+					{t('LOG_OUT')}
 				</ToggleItem>
 			</ToggleMenu>
 		</NavbarCommon>

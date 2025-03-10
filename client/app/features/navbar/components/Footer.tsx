@@ -5,20 +5,21 @@ import React from 'react';
 import FontAwesomeIcon from '@/app/components/FontAwesomeIcon';
 import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Tooltip from '@/app/components/Tooltip';
+import { useLang } from '@/app/features/language';
 
 export default function Footer() {
-	const platformName = 'AI Agent Platform';
+	const { t } = useLang();
 	const sitesInfo = [
 		{
 			name: 'Github',
 			icon: <FontAwesomeIcon icon={faGithub} />,
-			description: 'View our source code on Github',
+			description: t('VIEW_SOURCE_CODE_ON_GITHUB'),
 			link: 'https://github.com/threezinedine/ai-agent-platform',
 		},
 		{
 			name: 'Youtube',
 			icon: <FontAwesomeIcon icon={faYoutube} />,
-			description: 'Watch our latest videos on Youtube',
+			description: t('WATCH_LATEST_VIDEO_ON_YOUTUBE'),
 			link: 'https://www.youtube.com/@thaonguyenthe2933',
 		},
 	];
@@ -51,7 +52,7 @@ export default function Footer() {
 						className={clsx('text-center', 'md:text-left', 'px-8')}
 					>
 						<h3 className="text-base font-medium text-gray-800 dark:text-gray-200">
-							{platformName}
+							{t('AI_AGENT_PLATFORM')}
 						</h3>
 						<p
 							className={clsx(
@@ -61,7 +62,7 @@ export default function Footer() {
 								'dark:text-gray-400'
 							)}
 						>
-							An open-source project for building AI agents
+							{t('AI_AGENT_PLATFORM_DESCRIPTION')}
 						</p>
 					</div>
 
@@ -122,7 +123,7 @@ export default function Footer() {
 						'dark:text-gray-400'
 					)}
 				>
-					© 2025 {platformName}. All rights reserved.
+					© 2025 {t('AI_AGENT_PLATFORM')}. {t('ALL_RIGHTS_RESERVED')}
 				</div>
 			</div>
 		</footer>

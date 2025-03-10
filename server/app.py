@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from databases.db_tools import create_db_and_tables, create_default_users
 import shutil
 import logging
+from utils import LanguageService
 
 load_dotenv()
 
@@ -15,6 +16,8 @@ load_dotenv()
 async def lifespan(app: FastAPI):
     create_db_and_tables()
     create_default_users()
+
+    LanguageService.Load(os.path.dirname(__file__))
 
     avatar_dir = os.environ["AVATAR_FOLDER_DIR"]
     if avatar_dir is None:

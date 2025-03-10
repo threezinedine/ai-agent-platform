@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import * as languageConstants from '../data/constants';
 import t, { LanguageService } from '../services/LanguageServices';
+import HttpRequest from '@/app/services/httpRequest';
 
 export type Translation = (key: string) => string;
 
@@ -14,6 +15,7 @@ const useLang = create<LanguageState>((set) => ({
 	lang: languageConstants.LANGUAGE_EN,
 	changeLanguage: async (lang: languageConstants.Language) => {
 		await LanguageService.getInstance().changeLanguage(lang);
+		HttpRequest.setLanguage(lang);
 		set({ lang });
 	},
 	t: (key: string) => t(key),

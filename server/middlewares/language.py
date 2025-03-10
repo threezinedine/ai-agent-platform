@@ -1,10 +1,14 @@
-from fastapi import Header
+from typing import Annotated
+from fastapi import Depends, Header
+from utils import LANGUE_EN
 
 
 def get_language(
-    lang: str = Header("en"),
+    language: str = Header(None),
 ) -> str:
-    return lang
+    if language is None:
+        return LANGUE_EN
+    return language
 
 
-LanguageDependency = get_language
+LanguageDependency = Depends(get_language)

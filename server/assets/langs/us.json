@@ -1,0 +1,9 @@
+{
+	"USER_NOT_FOUND": "User not found",
+	"USER_ALREADY_EXISTS": "User already exists",
+	"INVALID_EMAIL": "Invalid email",
+	"INVALID_PASSWORD": "Invalid password",
+	"INVALID_TOKEN": "Invalid token",
+	"UNAUTHORIZED": "Unauthorized",
+	"TOKEN_EXPIRED": "Token expired"
+}

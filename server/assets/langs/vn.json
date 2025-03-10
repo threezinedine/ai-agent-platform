@@ -1,0 +1,9 @@
+{
+	"USER_NOT_FOUND": "Người dùng không tồn tại",
+	"USER_ALREADY_EXISTS": "Người dùng đã tồn tại",
+	"INVALID_EMAIL": "Email không hợp lệ",
+	"INVALID_PASSWORD": "Mật khẩu không hợp lệ",
+	"INVALID_TOKEN": "Token không hợp lệ",
+	"UNAUTHORIZED": "Không được phép",
+	"TOKEN_EXPIRED": "Token đã hết hạn"
+}
