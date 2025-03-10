@@ -5,7 +5,7 @@ from schemas.users import *
 from models import *
 from sqlmodel import select
 from constants import *
-from .get_user_depend import ScopeDependency
+from middlewares.get_user_depend import ScopeDependency
 from utils import generate_token, TokenGeneratorError, TokenGeneratorData
 from dotenv import load_dotenv
 
