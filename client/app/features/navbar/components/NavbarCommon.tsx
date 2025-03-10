@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import { Logo } from './Logo';
+import { LanguageSelect } from '@/app/features/language';
 
 export default function NavbarCommon({
 	children,
@@ -21,7 +22,10 @@ export default function NavbarCommon({
 			<div className={clsx('flex', 'items-center')}>
 				<Logo />
 			</div>
-			<div className={clsx('flex', 'items-center')}>{children}</div>
+			<div className={clsx('flex', 'items-center')}>
+				<LanguageSelect />
+				{children}
+			</div>
 		</div>
 	);
 }

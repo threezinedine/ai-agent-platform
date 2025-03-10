@@ -12,6 +12,7 @@ import {
 } from '@/app/components/ToggleMenu';
 import UserAvatar from '@/app/components/UserAvatar';
 import NavbarRequest from '../services/navbarRequest';
+import NavbarSepartor from './NavbarSeparator';
 
 function AuthNavbar() {
 	const { user, logout } = useContext(AuthContext);
@@ -41,6 +42,7 @@ function AuthNavbar() {
 
 	return (
 		<NavbarCommon>
+			<NavbarSepartor />
 			<ToggleMenu
 				testId="user-menu"
 				menuOnRight

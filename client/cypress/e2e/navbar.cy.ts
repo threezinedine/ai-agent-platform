@@ -81,4 +81,16 @@ describe('Navbar Testing', () => {
 			);
 		});
 	});
+
+	it('should store the language preference in local storage', () => {
+		cy.visit('/home');
+		cy.get('[data-testid=language-selection-en-flag]').should('exist');
+
+		cy.get('[data-testid=language-selection-trigger]').click();
+
+		cy.get('[data-testid=language-selection-vi]').click();
+
+		cy.visit('/home');
+		cy.get('[data-testid=language-selection-vi-flag]').should('exist');
+	});
 });
