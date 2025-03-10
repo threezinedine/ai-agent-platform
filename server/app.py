@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
     create_db_and_tables()
     create_default_users()
 
-    LanguageService.Load(os.path.dirname(__file__))
+    LanguageService.Load()
 
     avatar_dir = os.environ["AVATAR_FOLDER_DIR"]
     if avatar_dir is None:

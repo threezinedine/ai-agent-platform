@@ -2,7 +2,6 @@ describe('Testing toast', () => {
 	it('should display the toast message when the user logs in successfully', () => {
 		cy.fixture('users').then((users) => {
 			const defaultUser = users.defaultUser;
-			console.log(defaultUser);
 
 			cy.visit('/login');
 			cy.get('input#username').type(defaultUser.username);

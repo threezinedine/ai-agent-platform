@@ -2,7 +2,6 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 import FormProps, { Validator } from './FormProps';
 import clsx from 'clsx';
 import Button from '@/app/components/Button';
-import { useLang } from '@/app/features/language';
 
 interface InputData {
 	value: string;
@@ -35,8 +34,6 @@ const Form = forwardRef(
 
 			return acc;
 		}, {} as { [key: string]: Validator[] });
-
-		const { t } = useLang();
 
 		const [inputData, setInputData] = React.useState<InputDataDict>(
 			inputs.reduce((acc, input) => {
@@ -232,9 +229,7 @@ const Form = forwardRef(
 										  )
 										: clsx()
 								)}
-								placeholder={
-									input.placeholder || t('ENTER_THIS_FIELD')
-								}
+								placeholder={input.placeholder || ''}
 								onChange={(e) =>
 									onInputChange(input.testId, e.target.value)
 								}
@@ -263,7 +258,7 @@ const Form = forwardRef(
 				{!submitHidden && (
 					<Button
 						testId={`${testId}-submit-btn`}
-						text={t('SUBMIT')}
+						text={'Submit'}
 						onClick={handleSubmit}
 						variant="secondary"
 						className={clsx('mt-5')}

@@ -5,7 +5,6 @@ import { ToggleItem, ToggleMenu } from '@/app/components/ToggleMenu';
 import Image from 'next/image';
 import clsx from 'clsx';
 import Tooltip from '@/app/components/Tooltip';
-import Storage from '@/app/utils/storage';
 import { ToastService } from '@/app/features/toast';
 import * as languageConstants from '../data/constants';
 import useLang from '../contexts/LanguageContext';
@@ -21,9 +20,8 @@ export default function LanguageSelect() {
 	}, [lang]);
 
 	const handleLanguageChange = async (lang: string) => {
-		await Storage.SetItem(languageConstants.LANGUAGE_KEY, lang);
 		setLanguage(lang);
-		changeLanguage(lang as languageConstants.Language);
+		await changeLanguage(lang as languageConstants.Language);
 		ToastService.getInstance().addToastMessage({
 			message:
 				lang === languageConstants.LANGUAGE_EN

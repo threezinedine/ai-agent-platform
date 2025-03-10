@@ -5,10 +5,9 @@ class Storage {
 		if (!item) {
 			return Promise.resolve(defaultValue);
 		}
-		if (typeof defaultValue === 'string') {
-			return Promise.resolve(item as T);
-		}
-		return Promise.resolve(JSON.parse(item));
+
+		console.log(JSON.parse(item));
+		return Promise.resolve<T>(JSON.parse(item));
 	}
 
 	static SetItem<T>(key: string, value: T): Promise<void> {

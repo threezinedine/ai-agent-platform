@@ -49,7 +49,6 @@ class HttpRequest {
 			});
 			return new Response<T>(response.status, response.data, '');
 		} catch (error: unknown) {
-			console.log('error', error);
 			if (!axios.isAxiosError(error)) {
 				const axiosError = error as AxiosError;
 				return new Response<T>(
@@ -135,11 +134,6 @@ class HttpRequest {
 		} catch (error: unknown) {
 			if (axios.isAxiosError(error)) {
 				const axiosError = error as AxiosError;
-				console.log(
-					'error',
-					error,
-					(axiosError.response?.data as { detail: string })?.detail
-				);
 				return new Response<T>(
 					axiosError.response ? axiosError.response.status : 500,
 					null,

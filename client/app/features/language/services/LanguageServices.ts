@@ -1,6 +1,7 @@
 import * as languageConstants from '../data/constants';
 import usLocale from '../data/locales/us';
 import vnLocale from '../data/locales/vn';
+import Storage from '@/app/utils/storage';
 
 class LanguageService {
 	private lang: languageConstants.Language = languageConstants.LANGUAGE_EN;
@@ -34,7 +35,7 @@ class LanguageService {
 	async changeLanguage(lang: languageConstants.Language) {
 		this.lang = lang;
 		this.updateLang();
-		await localStorage.setItem(languageConstants.LANGUAGE_KEY, lang);
+		await Storage.SetItem<string>(languageConstants.LANGUAGE_KEY, lang);
 	}
 
 	translate(key: string) {

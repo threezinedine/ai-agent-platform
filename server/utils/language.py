@@ -12,16 +12,16 @@ class LanguageService:
     en_data: Optional[Dict[str, str]] = None
 
     @staticmethod
-    def Load(base: str):
+    def Load():
         with open(
-            os.path.join(base, "assets/langs/vn.json"),
+            "assets/langs/vn.json",
             "r",
             encoding="utf-8",
         ) as f:
             LanguageService.vi_data = json.load(f)
 
         with open(
-            os.path.join(base, "assets/langs/us.json"),
+            "assets/langs/us.json",
             "r",
             encoding="utf-8",
         ) as f:

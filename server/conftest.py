@@ -1,10 +1,11 @@
 import os
 import sys
 from dotenv import load_dotenv
+from utils import LanguageService
 
 
 def pytest_sessionstart(session):
-    pass
+    LanguageService.Load()
 
 
 def pytest_sessionfinish(session, exitstatus):
