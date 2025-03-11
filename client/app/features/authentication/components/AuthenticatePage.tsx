@@ -1,58 +1,24 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import useAuth from '@/app/features/authentication/hooks/Authorize';
-import { useRouter } from 'next/navigation';
-import LoadingPage from './LoadingPage';
-import { AuthContext } from '../context/AuthContext';
-import Storage from '@/app/utils/storage';
-import * as constants from '../data/constants';
+import React from 'react';
+import LoadingComponent from '@/app/components/LoadingComponent';
+import useAuth from '../hooks/authenticateHooks';
 
 interface AuthenticatePageProps {
 	children: React.ReactNode;
-	loadingNode?: React.ReactNode;
 	unauthorizedNode?: React.ReactNode;
 }
 
 export default function AuthenticatePage({
 	children,
-	loadingNode,
-	unauthorizedNode,
+	unauthorizedNode = null,
 }: AuthenticatePageProps) {
-	const router = useRouter();
-	const { isAuthorized, loading, user } = useAuth();
-
-	useEffect(() => {
-		(async () => {
-			if (loading) {
-				return;
-			}
-
-			if (!isAuthorized) {
-				if (unauthorizedNode == null || unauthorizedNode == undefined) {
-					router.push('/login');
-				}
-			}
-		})();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
-
-	function onLogout() {
-		Storage.RemoveItem(constants.ACCESS_TOKEN_KEY);
-	}
+	const { state, isAuthenticated } = useAuth();
 
 	return (
-		<AuthContext.Provider
-			value={{
-				isAuthenticated: isAuthorized,
-				logout: onLogout,
-				user: user,
-			}}
-		>
-			{loading && loadingNode && loadingNode}
-			{loading && !loadingNode && <LoadingPage />}
-			{!loading && isAuthorized && children}
-			{!loading && !isAuthorized && unauthorizedNode}
-		</AuthContext.Provider>
+		<LoadingComponent
+			state={state}
+			loaded={isAuthenticated ? children : unauthorizedNode}
+		/>
 	);
 }

@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useAvatar } from '../contexts/AvatarContexts';
+import { useAuth } from '@/app/features/authentication';
 import UserAvatar from '@/app/components/UserAvatar';
 
 export default function NavbarAvatar({ username }: { username: string }) {
-	const { avatar } = useAvatar();
+	const { avatar } = useAuth();
 
 	return (
 		<UserAvatar

@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useAvatar } from '../contexts/AvatarContexts';
 import UserAvatar from '@/app/components/UserAvatar';
+import { useAuth } from '@/app/features/authentication';
 import FontAwesomeIcon from '@/app/components/FontAwesomeIcon';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
@@ -12,7 +12,7 @@ import { useLang } from '@/app/features/language';
 
 export default function UpdateAvatar() {
 	const { t } = useLang();
-	const { avatar, reloadAvatar } = useAvatar();
+	const { avatar, reloadAvatar } = useAuth();
 	const avatarRequest = new AvatarRequest();
 
 	async function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {

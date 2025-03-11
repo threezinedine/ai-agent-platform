@@ -1,22 +1,17 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Form from '@/app/components/Form';
 import { useLang } from '@/app/features/language';
 import clsx from 'clsx';
 import Button from '@/app/components/Button';
-import useProfile from '../contexts/ProfileContext';
+import { useAuth } from '@/app/features/authentication';
 import LoadingComponent from '@/app/components/LoadingComponent';
 
 export default function ProfileForm() {
 	const { t } = useLang();
 	const formRef = useRef(null);
-	const { state, userInfo, reloadUserInfo } = useProfile();
-
-	useEffect(() => {
-		reloadUserInfo();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	const { state, userInfo } = useAuth();
 
 	function handleSubmit(data: { [key: string]: string }) {
 		console.log(data);

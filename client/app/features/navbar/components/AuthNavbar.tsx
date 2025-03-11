@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useContext, useEffect } from 'react';
-import { AuthenticatePage, AuthContext } from '@/app/features/authentication';
+import React from 'react';
+import { useAuth } from '@/app/features/authentication';
 import { useRouter } from 'next/navigation';
 import { ToastService } from '@/app/features/toast';
 import NavbarCommon from './NavbarCommon';
@@ -12,18 +12,12 @@ import {
 } from '@/app/components/ToggleMenu';
 import NavbarSepartor from './NavbarSeparator';
 import { useLang } from '@/app/features/language';
-import { NavbarAvatar, useAvatar } from '@/app/features/avatar';
+import { NavbarAvatar } from '@/app/features/avatar';
 
-function AuthNavbar() {
-	const { user, logout } = useContext(AuthContext);
+export default function AuthNavbar() {
+	const { userInfo, logout } = useAuth();
 	const router = useRouter();
 	const { t } = useLang();
-	const { reloadAvatar } = useAvatar();
-
-	useEffect(() => {
-		reloadAvatar();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	function onLogout() {
 		logout();
@@ -41,7 +35,9 @@ function AuthNavbar() {
 			<ToggleMenu
 				testId="user-menu"
 				menuOnRight
-				triggerNode={<NavbarAvatar username={user?.username || ''} />}
+				triggerNode={
+					<NavbarAvatar username={userInfo?.username || ''} />
+				}
 			>
 				<ToggleItem onClick={() => router.push('/dashboard')}>
 					{t('DASHBOARD')}
@@ -59,13 +55,5 @@ function AuthNavbar() {
 				</ToggleItem>
 			</ToggleMenu>
 		</NavbarCommon>
-	);
-}
-
-export default function AuthenticatedNavbar() {
-	return (
-		<AuthenticatePage>
-			<AuthNavbar />
-		</AuthenticatePage>
 	);
 }

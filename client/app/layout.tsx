@@ -5,6 +5,7 @@ import Toast from './features/toast';
 import { useEffect } from 'react';
 import { languageConstants, useLang } from '@/app/features/language';
 import Storage from '@/app/utils/storage';
+import { useAuth } from '@/app/features/authentication';
 
 export default function RootLayout({
 	children,
@@ -12,6 +13,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const { changeLanguage } = useLang();
+	const { initialLoad } = useAuth();
 
 	useEffect(() => {
 		(async () => {
@@ -19,6 +21,7 @@ export default function RootLayout({
 				languageConstants.LANGUAGE_KEY,
 				languageConstants.LANGUAGE_EN
 			);
+			await initialLoad();
 			changeLanguage(lang as languageConstants.Language);
 		})();
 		// eslint-disable-next-line react-hooks/exhaustive-deps

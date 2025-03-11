@@ -5,13 +5,13 @@ import clsx from 'clsx';
 
 export default function LoadingComponent({
 	state,
-	error,
 	loaded,
+	error = null,
 	loading = <LoadingSpinner size={20} />,
 }: {
 	state: LoadingComponentState;
 	loading?: React.ReactNode;
-	error: React.ReactNode;
+	error?: React.ReactNode;
 	loaded: React.ReactNode;
 }) {
 	return (
@@ -29,7 +29,7 @@ export default function LoadingComponent({
 					{loading}
 				</div>
 			)}
-			{state === 'error' && error}
+			{state === 'error' && error !== null && error}
 			{state === 'loaded' && loaded}
 		</div>
 	);

@@ -1,6 +1,6 @@
 import AuthenticatePage from './components/AuthenticatePage';
 import LoginForm from './components/LoginForm';
-import { AuthContext } from './context/AuthContext';
 import * as authenticateConstants from './data/constants';
+import useAuth from './hooks/authenticateHooks';
 
-export { AuthenticatePage, LoginForm, AuthContext, authenticateConstants };
+export { AuthenticatePage, LoginForm, authenticateConstants, useAuth };
