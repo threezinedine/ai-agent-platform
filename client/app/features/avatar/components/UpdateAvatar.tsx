@@ -24,7 +24,7 @@ export default function UpdateAvatar() {
 			if (response.isSuccess()) {
 				await reloadAvatar();
 				ToastService.getInstance().addToastMessage({
-					message: t('UPDATE_AVATAR_SUCCESSFULLY'),
+					message: t('AVATAR_UPDATED_SUCCESSFULLY'),
 					type: 'success',
 					duration: 1000,
 				});
