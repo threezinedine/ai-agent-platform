@@ -1,9 +1,15 @@
 'use client';
 
-import React from 'react';
-// import clsx from 'clsx';
+import React, { useEffect } from 'react';
 import RegisterForm from '@/app/features/authentication/components/RegisterForm';
+import { useLang } from '@/app/features/language';
 
 export default function RegisterPage() {
+	const { t } = useLang();
+
+	useEffect(() => {
+		document.title = t('REGISTER');
+	});
+
 	return <RegisterForm />;
 }

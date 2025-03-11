@@ -1,5 +1,5 @@
 const locale = {
-	HOME_PAGE: 'Trang chủ',
+	HOME: 'Trang chủ',
 	LOGIN: 'Đăng nhập',
 	REGISTER: 'Đăng ký',
 	USERNAME: 'Tên đăng nhập',
