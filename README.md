@@ -21,14 +21,14 @@ This platform aims to streamline the development and deployment of AI agents by 
 
 ## Table of Contents
 
-- [AI Agent Platform](#ai-agent-platform)
-  - [Table of Contents](#table-of-contents)
-  - [Build Docker Image](#build-docker-image)
-    - [Prerequisites](#prerequisites)
-    - [Steps](#steps)
-    - [Remarks:](#remarks)
-  - [Development Instructions](#development-instructions)
-  - [Contact Us](#contact-us)
+-   [AI Agent Platform](#ai-agent-platform)
+    -   [Table of Contents](#table-of-contents)
+    -   [Build Docker Image](#build-docker-image)
+        -   [Prerequisites](#prerequisites)
+        -   [Steps](#steps)
+        -   [Remarks:](#remarks)
+    -   [Development Instructions](#development-instructions)
+    -   [Contact Us](#contact-us)
 
 ## Build Docker Image
 
@@ -50,6 +50,12 @@ To rebuild the image, use the following command:
 ```sh
 docker-compose build
 docker-compose up -d
+```
+
+To build the image inside the container, use the following command:
+
+```sh
+docker compose -f docker-compose.yml -f docker-compose.build.yml up -d
 ```
 
 To stop the container, use the following command:
