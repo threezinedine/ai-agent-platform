@@ -5,8 +5,11 @@ import clsx from 'clsx';
 import MyLink from './MyLink';
 import NavbarCommon from './NavbarCommon';
 import NavbarSepartor from './NavbarSeparator';
+import { useLang } from '@/app/features/language';
 
 export default function UnAuthNavbar() {
+	const { t } = useLang();
+
 	return (
 		<NavbarCommon>
 			<NavbarSepartor />
@@ -15,14 +18,14 @@ export default function UnAuthNavbar() {
 					href="/login"
 					testId="login"
 				>
-					Login
+					{t('LOGIN')}
 				</MyLink>
 				<MyLink
 					href="/register"
 					testId="register"
 					secondary
 				>
-					Register
+					{t('REGISTER')}
 				</MyLink>
 			</div>
 		</NavbarCommon>
