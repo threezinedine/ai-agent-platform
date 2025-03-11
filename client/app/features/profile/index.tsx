@@ -8,6 +8,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { useRef } from 'react';
 import Button from '@/app/components/Button';
 import { useLang } from '../language';
+import UpdateAvatar from './components/UpdateAvatar';
 
 export default function ProfilePageComponent() {
 	const formRef = useRef(null);
@@ -67,15 +68,25 @@ export default function ProfilePageComponent() {
 						'dark:border-gray-700'
 					)}
 				>
-					<div className={clsx('p-8')}></div>
-					<div className={clsx('p-8')}>
+					<div
+						className={clsx(
+							'p-2',
+							'flex',
+							'justify-center',
+							'my-8'
+						)}
+					>
+						<UpdateAvatar />
+					</div>
+					<div className={clsx('p-2')}>
 						<h3
 							className={clsx(
 								'text-lg',
 								'font-medium',
 								'text-gray-900',
 								'dark:text-white',
-								'mb-4'
+								'mb-4',
+								'text-center'
 							)}
 						>
 							{t('PLATFORM_LINKS')}

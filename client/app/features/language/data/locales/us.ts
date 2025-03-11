@@ -49,6 +49,9 @@ const locale = {
 	PLATFORM_LINKS: 'Platform Links',
 
 	ENTER_THIS_PLATFORM_PROFILE: 'Enter your ${name} profile',
+	UPDATE_AVATAR: 'Update Avatar',
+
+	UPDATE: 'Update',
 };
 
 export default locale;

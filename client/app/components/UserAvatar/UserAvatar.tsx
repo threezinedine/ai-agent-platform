@@ -1,17 +1,31 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 
 export default function UserAvatar({
 	username,
 	image,
 	testId,
+	hoverIcon = null,
 	size = 'md',
 }: {
 	username: string;
 	image?: string | null;
-	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+	size?:
+		| 'xs'
+		| 'sm'
+		| 'md'
+		| 'lg'
+		| 'xl'
+		| '2xl'
+		| '3xl'
+		| '4xl'
+		| '5xl'
+		| '6xl'
+		| '7xl'
+		| '8xl';
 	testId?: string;
+	hoverIcon?: React.ReactNode;
 }) {
 	const firstLetter = username.charAt(0).toUpperCase() || '?';
 
@@ -22,6 +36,12 @@ export default function UserAvatar({
 		lg: clsx('w-12', 'h-12', 'text-lg'),
 		xl: clsx('w-14', 'h-14', 'text-xl'),
 		'2xl': clsx('w-16', 'h-16', 'text-2xl'),
+		'3xl': clsx('w-20', 'h-20', 'text-3xl'),
+		'4xl': clsx('w-24', 'h-24', 'text-4xl'),
+		'5xl': clsx('w-28', 'h-28', 'text-5xl'),
+		'6xl': clsx('w-32', 'h-32', 'text-6xl'),
+		'7xl': clsx('w-36', 'h-36', 'text-7xl'),
+		'8xl': clsx('w-40', 'h-40', 'text-8xl'),
 	};
 
 	function generateColor(name: string) {
@@ -44,15 +64,45 @@ export default function UserAvatar({
 	}
 
 	const letterColorClasses = generateColor(username);
+	const [isHovered, setIsHovered] = useState(false);
+
+	const iconClasses = clsx(
+		'absolute',
+		'top-0',
+		'left-0',
+		'flex',
+		'items-center',
+		'justify-center',
+		'w-full',
+		'h-full',
+		'rounded-full',
+		'bg-black',
+		'bg-opacity-50',
+		'text-white',
+		'opacity-0',
+		'transition-opacity',
+		'duration-300',
+		'ease-in-out',
+		'hover:opacity-100'
+	);
+	const iconInteralClasses = clsx();
 
 	return (
 		<div
 			data-testid={testId}
 			className={clsx(
+				'relative',
+				'flex',
+				'items-center',
+				'justify-center',
 				'select-none',
 				'cursor-pointer',
 				'hover:opacity-80'
 			)}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			onFocus={() => setIsHovered(true)}
+			onBlur={() => setIsHovered(false)}
 		>
 			{image ? (
 				<div className={clsx('rounded-full', 'overflow-hidden')}>
@@ -62,6 +112,13 @@ export default function UserAvatar({
 						width={40}
 						height={40}
 					/>
+					{isHovered && hoverIcon && (
+						<div className={iconClasses}>
+							<div className={iconInteralClasses}>
+								{hoverIcon}
+							</div>
+						</div>
+					)}
 				</div>
 			) : (
 				<div
@@ -76,6 +133,13 @@ export default function UserAvatar({
 					)}
 				>
 					{firstLetter}
+					{isHovered && hoverIcon && (
+						<div className={iconClasses}>
+							<div className={iconInteralClasses}>
+								{hoverIcon}
+							</div>
+						</div>
+					)}
 				</div>
 			)}
 		</div>

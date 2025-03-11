@@ -49,6 +49,9 @@ const locale = {
 	PLATFORM_LINKS: 'Liên kết nền tảng',
 
 	ENTER_THIS_PLATFORM_PROFILE: 'Nhập vào hồ sơ ${name} của bạn',
+	UPDATE_AVATAR: 'Cập nhật ảnh đại diện',
+
+	UPDATE: 'Cập nhật',
 };
 
 export default locale;

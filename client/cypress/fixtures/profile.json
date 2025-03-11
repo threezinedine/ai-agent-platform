@@ -1,0 +1,14 @@
+{
+	"username": "testuser",
+	"password": "testpassword",
+	"firstProfile": {
+		"firstName": "Test",
+		"lastName": "User",
+		"email": "testuser@gmail.com"
+	},
+	"secondProfile": {
+		"firstName": "Test2",
+		"lastName": "User2",
+		"email": "testuser2@gmail.com"
+	}
+}

@@ -5,9 +5,9 @@ import {
 	faLinkedin,
 	faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-library.add(faGithub, faTwitter, faLinkedin, faCheck, faYoutube);
+library.add(faGithub, faTwitter, faLinkedin, faCheck, faYoutube, faCamera);
 
 export default FontAwesomeIcon;
