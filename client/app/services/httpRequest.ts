@@ -113,6 +113,50 @@ class HttpRequest {
 		}
 	}
 
+	async putForm(
+		url: string,
+		form: FormData,
+		token: string = ''
+	): Promise<Response<string>> {
+		const header = token
+			? {
+					Authorization: token,
+					language: HttpRequest.language,
+					'Content-Type': 'multipart/form-data',
+			  }
+			: {
+					language: HttpRequest.language,
+					'Content-Type': 'multipart/form-data',
+			  };
+
+		try {
+			const reponse = await axios.put<string>(
+				`${this.baseUrl}${url}`,
+				form,
+				{
+					withCredentials: true,
+					headers: header,
+				}
+			);
+
+			return new Response<string>(reponse.status, reponse.data, '');
+		} catch (error: unknown) {
+			if (axios.isAxiosError(error)) {
+				const axiosError = error as AxiosError;
+				return new Response<string>(
+					axiosError.response ? axiosError.response.status : 500,
+					null,
+					axiosError.response
+						? (axiosError.response.data as { message: string })
+								.message
+						: 'An error occurred'
+				);
+			} else {
+				return new Response<string>(1000, null, 'Unknown error');
+			}
+		}
+	}
+
 	async post<K, T>(
 		url: string,
 		data: K,

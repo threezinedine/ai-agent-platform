@@ -10,25 +10,18 @@ import {
 	ToggleItem,
 	ToggleMenuSeparator,
 } from '@/app/components/ToggleMenu';
-import UserAvatar from '@/app/components/UserAvatar';
-import NavbarRequest from '../services/navbarRequest';
 import NavbarSepartor from './NavbarSeparator';
 import { useLang } from '@/app/features/language';
+import { NavbarAvatar, useAvatar } from '@/app/features/avatar';
 
 function AuthNavbar() {
 	const { user, logout } = useContext(AuthContext);
 	const router = useRouter();
-	const navbarRequest = new NavbarRequest();
-	const [avatarUrl, setAvatarUrl] = React.useState<string | null>(null);
 	const { t } = useLang();
+	const { reloadAvatar } = useAvatar();
 
 	useEffect(() => {
-		(async () => {
-			const response = await navbarRequest.getAvatar();
-			if (response.isSuccess()) {
-				setAvatarUrl(response.getData());
-			}
-		})();
+		reloadAvatar();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -48,13 +41,7 @@ function AuthNavbar() {
 			<ToggleMenu
 				testId="user-menu"
 				menuOnRight
-				triggerNode={
-					<UserAvatar
-						testId={user?.username}
-						username={user?.username || '?'}
-						image={avatarUrl}
-					/>
-				}
+				triggerNode={<NavbarAvatar username={user?.username || ''} />}
 			>
 				<ToggleItem onClick={() => router.push('/dashboard')}>
 					{t('DASHBOARD')}

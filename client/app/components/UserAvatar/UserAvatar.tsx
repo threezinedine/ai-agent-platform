@@ -44,6 +44,21 @@ export default function UserAvatar({
 		'8xl': clsx('w-40', 'h-40', 'text-8xl'),
 	};
 
+	const imageSizes = {
+		xs: 24,
+		sm: 32,
+		md: 40,
+		lg: 48,
+		xl: 56,
+		'2xl': 64,
+		'3xl': 80,
+		'4xl': 96,
+		'5xl': 112,
+		'6xl': 128,
+		'7xl': 144,
+		'8xl': 160,
+	};
+
 	function generateColor(name: string) {
 		const colors = [
 			clsx('bg-blue-500', 'text-blue-50', 'hover:bg-blue-600'),
@@ -109,8 +124,8 @@ export default function UserAvatar({
 					<Image
 						src={image}
 						alt="Image"
-						width={40}
-						height={40}
+						width={imageSizes[size]}
+						height={imageSizes[size]}
 					/>
 					{isHovered && hoverIcon && (
 						<div className={iconClasses}>

@@ -52,6 +52,7 @@ const locale = {
 	UPDATE_AVATAR: 'Update Avatar',
 
 	UPDATE: 'Update',
+	AVATAR_UPDATED_SUCCESSFULLY: 'Avatar updated successfully',
 };
 
 export default locale;

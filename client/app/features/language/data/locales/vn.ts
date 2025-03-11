@@ -52,6 +52,7 @@ const locale = {
 	UPDATE_AVATAR: 'Cập nhật ảnh đại diện',
 
 	UPDATE: 'Cập nhật',
+	AVATAR_UPDATED_SUCCESSFULLY: 'Ảnh đại diện đã được cập nhật thành công',
 };
 
 export default locale;

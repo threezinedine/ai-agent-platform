@@ -8,7 +8,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { useRef } from 'react';
 import Button from '@/app/components/Button';
 import { useLang } from '../language';
-import UpdateAvatar from './components/UpdateAvatar';
+import { UpdateAvatar } from '@/app/features/avatar';
 
 export default function ProfilePageComponent() {
 	const formRef = useRef(null);
