@@ -8,6 +8,7 @@ import Tooltip from '@/app/components/Tooltip';
 import { ToastService } from '@/app/features/toast';
 import * as languageConstants from '../data/constants';
 import useLang from '../contexts/LanguageContext';
+import { formatString } from '@/app/utils/string_utils';
 
 export default function LanguageSelect() {
 	const [language, setLanguage] = React.useState(
@@ -23,10 +24,12 @@ export default function LanguageSelect() {
 		setLanguage(lang);
 		await changeLanguage(lang as languageConstants.Language);
 		ToastService.getInstance().addToastMessage({
-			message:
-				lang === languageConstants.LANGUAGE_EN
-					? t('CHANGE_LANGUAGE_TO_EN')
-					: t('CHANGE_LANGUAGE_TO_VI'),
+			message: formatString(t('CHANGE_LANGUAGE_TO'), {
+				language:
+					lang === languageConstants.LANGUAGE_EN
+						? t('ENGLISH')
+						: t('VIETNAMESE'),
+			}),
 			type: 'success',
 			duration: 3000,
 		});

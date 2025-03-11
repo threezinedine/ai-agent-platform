@@ -23,6 +23,7 @@ export default interface FormProps {
 	inputs?: InputProps[];
 	className?: string;
 	submitHidden?: boolean;
+	submitText?: string;
 	shadowDisabled?: boolean;
 }
 

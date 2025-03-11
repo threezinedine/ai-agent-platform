@@ -6,7 +6,6 @@ class Storage {
 			return Promise.resolve(defaultValue);
 		}
 
-		console.log(JSON.parse(item));
 		return Promise.resolve<T>(JSON.parse(item));
 	}
 

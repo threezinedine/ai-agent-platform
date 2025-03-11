@@ -53,6 +53,7 @@ export default function LoginForm() {
 			testId="login-form"
 			className={clsx('w-1/3')}
 			submitFunc={handleSubmit}
+			submitText={t('SUBMIT')}
 			footer={
 				<div>
 					{t('DO_NOT_HAVE_AN_ACCOUNT')}{' '}
@@ -68,10 +69,11 @@ export default function LoginForm() {
 				{
 					testId: 'username',
 					title: t('USERNAME'),
+					placeholder: t('ENTER_THE_USERNAME'),
 					validators: [
 						{
 							validate: (value: string) => value.length > 0,
-							message: 'Username is required',
+							message: t('USERNAME_IS_REQUIRED'),
 						},
 					],
 				},
@@ -79,10 +81,11 @@ export default function LoginForm() {
 					testId: 'password',
 					title: t('PASSWORD'),
 					type: 'password',
+					placeholder: t('ENTER_THE_PASSWORD'),
 					validators: [
 						{
 							validate: (value: string) => value.length > 0,
-							message: 'Password is required',
+							message: t('PASSWORD_IS_REQUIRED'),
 						},
 					],
 				},

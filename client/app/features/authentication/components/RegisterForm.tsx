@@ -33,6 +33,7 @@ export default function RegisterForm() {
 			testId="register-form"
 			className={clsx('w-1/3')}
 			submitFunc={handleSubmit}
+			submitText={t('SUBMIT')}
 			footer={
 				<div>
 					{t('ALREADY_HAVE_AN_ACCOUNT')}{' '}
@@ -48,15 +49,17 @@ export default function RegisterForm() {
 				{
 					testId: 'username',
 					title: t('USERNAME'),
+					placeholder: t('ENTER_THE_USERNAME'),
 					validators: [
 						{
 							validate: (value: string) => value.length > 0,
-							message: 'Username is required',
+							message: t('USERNAME_IS_REQUIRED'),
 						},
 						{
 							validate: (value: string) => value.length > 8,
-							message:
-								'Username must be at least 8 characters long',
+							message: t(
+								'USERNAME_MUST_BE_AT_LEAST_8_CHARACTERS_LONG'
+							),
 						},
 					],
 				},
@@ -64,15 +67,17 @@ export default function RegisterForm() {
 					testId: 'password',
 					title: t('PASSWORD'),
 					type: 'password',
+					placeholder: t('ENTER_THE_PASSWORD'),
 					validators: [
 						{
 							validate: (value: string) => value.length > 0,
-							message: 'Password is required',
+							message: t('PASSWORD_IS_REQUIRED'),
 						},
 						{
 							validate: (value: string) => value.length > 8,
-							message:
-								'Password must be at least 8 characters long',
+							message: t(
+								'PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS_LONG'
+							),
 						},
 					],
 				},
@@ -80,6 +85,7 @@ export default function RegisterForm() {
 					testId: 'confirm-password',
 					title: t('CONFIRM_PASSWORD'),
 					type: 'password',
+					placeholder: t('ENTER_THE_CONFIRM_PASSWORD'),
 					validators: [
 						{
 							validate: (value: string) => {
@@ -89,7 +95,7 @@ export default function RegisterForm() {
 
 								return password && value === password.value;
 							},
-							message: 'Passwords do not match',
+							message: t('PASSWORD_DOES_NOT_MATCH'),
 						},
 					],
 				},

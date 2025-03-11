@@ -7,9 +7,11 @@ import FontAwesomeIcon from '@/app/components/FontAwesomeIcon';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { useRef } from 'react';
 import Button from '@/app/components/Button';
+import { useLang } from '../language';
 
 export default function ProfilePageComponent() {
 	const formRef = useRef(null);
+	const { t } = useLang();
 
 	return (
 		<div
@@ -34,7 +36,7 @@ export default function ProfilePageComponent() {
 							'dark:text-white'
 						)}
 					>
-						Edit Your Profile
+						{t('EDIT_PROFILE')}
 					</h1>
 					<p
 						className={clsx(
@@ -43,7 +45,7 @@ export default function ProfilePageComponent() {
 							'dark:text-gray-400'
 						)}
 					>
-						Update your information and manage your account
+						{t('EDIT_PROFILE_DESCRIPTION')}
 					</p>
 				</div>
 			</div>
@@ -76,7 +78,7 @@ export default function ProfilePageComponent() {
 								'mb-4'
 							)}
 						>
-							Platform Links
+							{t('PLATFORM_LINKS')}
 						</h3>
 						<div className={clsx('space-y-4')}>
 							<SocialLink
@@ -93,19 +95,19 @@ export default function ProfilePageComponent() {
 							ref={formRef}
 							testId="profile"
 							shadowDisabled
-							name="Profile"
+							name={t('PROFILE')}
 							inputs={[
 								{
 									type: 'text',
-									title: 'Username',
+									title: t('USERNAME'),
 									testId: 'profile-username',
-									placeholder: 'Enter the username',
+									placeholder: t('ENTER_THE_USERNAME'),
 								},
 								{
 									type: 'email',
-									title: 'Email',
+									title: t('EMAIL'),
 									testId: 'profile-email',
-									placeholder: 'Enter the email',
+									placeholder: t('ENTER_THE_EMAIL'),
 								},
 							]}
 							submitHidden
@@ -114,11 +116,11 @@ export default function ProfilePageComponent() {
 					<div className={clsx('pt-5')}>
 						<div className={clsx('flex', 'justify-end', 'gap-3')}>
 							<Button
-								text="Cancel"
+								text={t('CANCEL')}
 								variant="subtle"
 							/>
 							<Button
-								text="Submit"
+								text={t('SUBMIT')}
 								variant="primary"
 							/>
 						</div>

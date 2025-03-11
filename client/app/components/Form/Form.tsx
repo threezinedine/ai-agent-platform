@@ -21,6 +21,7 @@ const Form = forwardRef(
 			description = null,
 			footer = null,
 			submitHidden = false,
+			submitText = 'Submit',
 			shadowDisabled = false,
 		}: FormProps,
 		ref: React.Ref<{ submit: () => void }>
@@ -258,7 +259,7 @@ const Form = forwardRef(
 				{!submitHidden && (
 					<Button
 						testId={`${testId}-submit-btn`}
-						text={'Submit'}
+						text={submitText}
 						onClick={handleSubmit}
 						variant="secondary"
 						className={clsx('mt-5')}

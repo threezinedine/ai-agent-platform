@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
+import { useLang } from '@/app/features/language';
+import { formatString } from '@/app/utils/string_utils';
 
 export default function SocialLink({
 	icon,
@@ -14,6 +16,8 @@ export default function SocialLink({
 	value?: string;
 	onValueChanged?: (value: string) => void;
 }) {
+	const { t } = useLang();
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (onValueChanged) {
 			onValueChanged(e.target.value);
@@ -94,7 +98,12 @@ export default function SocialLink({
 						'transition-all',
 						'duration-200'
 					)}
-					placeholder={`Enter your ${label} profile`}
+					placeholder={formatString(
+						t('ENTER_THIS_PLATFORM_PROFILE'),
+						{
+							name: label || '',
+						}
+					)}
 				/>
 			</div>
 		</div>
