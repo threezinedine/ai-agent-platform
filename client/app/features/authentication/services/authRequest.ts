@@ -1,5 +1,6 @@
 import HttpRequest, { Response } from '@/app/services/httpRequest';
-import { LoginResponse, UserLoginInfo, UserInfo } from '../data/types';
+import { LoginResponse, UserLoginInfo } from '../data/types';
+import { UserInfo } from '@/app/data/types';
 
 export default class AuthenRequest {
 	private httpRequest: HttpRequest = new HttpRequest(

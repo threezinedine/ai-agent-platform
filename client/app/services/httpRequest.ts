@@ -199,6 +199,41 @@ class HttpRequest {
 			}
 		}
 	}
+
+	async put<K, T>(url: string, data: K, token: string = '') {
+		const header = token
+			? { Authorization: token, language: HttpRequest.language }
+			: { language: HttpRequest.language };
+
+		try {
+			const response = await axios.put<T>(`${this.baseUrl}${url}`, data, {
+				headers: header,
+			});
+			return new Response<T>(response.status, response.data, '');
+		} catch (error: unknown) {
+			if (axios.isAxiosError(error)) {
+				const axiosError = error as AxiosError;
+				return new Response<T>(
+					axiosError.response ? axiosError.response.status : 500,
+					null,
+					axiosError.response
+						? (axiosError.response.data as { detail: string })
+								.detail
+						: HttpRequest.language == languageConstants.LANGUAGE_EN
+						? 'Unknown error 5'
+						: 'Lỗi không xác định'
+				);
+			} else {
+				return new Response<T>(
+					1000,
+					null,
+					HttpRequest.language == languageConstants.LANGUAGE_EN
+						? 'Unknown error 6'
+						: 'Lỗi không xác định'
+				);
+			}
+		}
+	}
 }
 
 export default HttpRequest;

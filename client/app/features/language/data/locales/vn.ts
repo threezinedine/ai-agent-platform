@@ -4,6 +4,7 @@ const locale = {
 	REGISTER: 'Đăng ký',
 	USERNAME: 'Tên đăng nhập',
 	EMAIL: 'Email',
+	FULL_NAME: 'Họ và tên',
 	PASSWORD: 'Mật khẩu',
 	ENTER_THIS_FIELD: 'Nhập vào trường này',
 	CONFIRM_PASSWORD: 'Xác nhận mật khẩu',
@@ -17,6 +18,8 @@ const locale = {
 
 	ENTER_THE_USERNAME: 'Nhập tên đăng nhập',
 	ENTER_THE_EMAIL: 'Nhập email',
+	ENTER_THE_FULL_NAME: 'Nhập họ và tên',
+	ENTER_THE_PHONE_NUMBER: 'Nhập số điện thoại',
 	ENTER_THE_PASSWORD: 'Nhập mật khẩu',
 	ENTER_THE_CONFIRM_PASSWORD: 'Nhập xác nhận mật khẩu',
 

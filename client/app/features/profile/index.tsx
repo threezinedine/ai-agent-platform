@@ -1,17 +1,14 @@
 'use client';
 
 import clsx from 'clsx';
-import Form from '@/app/components/Form';
 import SocialLink from './components/SocialLink';
 import FontAwesomeIcon from '@/app/components/FontAwesomeIcon';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { useRef } from 'react';
-import Button from '@/app/components/Button';
 import { useLang } from '../language';
 import { UpdateAvatar } from '@/app/features/avatar';
+import ProfileForm from './components/ProfileForm';
 
 export default function ProfilePageComponent() {
-	const formRef = useRef(null);
 	const { t } = useLang();
 
 	return (
@@ -101,41 +98,7 @@ export default function ProfilePageComponent() {
 					</div>
 				</div>
 				<div className={clsx('md:w-2/3', 'p-8')}>
-					<div className={clsx('p-8')}>
-						<Form
-							ref={formRef}
-							testId="profile"
-							shadowDisabled
-							name={t('PROFILE')}
-							inputs={[
-								{
-									type: 'text',
-									title: t('USERNAME'),
-									testId: 'profile-username',
-									placeholder: t('ENTER_THE_USERNAME'),
-								},
-								{
-									type: 'email',
-									title: t('EMAIL'),
-									testId: 'profile-email',
-									placeholder: t('ENTER_THE_EMAIL'),
-								},
-							]}
-							submitHidden
-						/>
-					</div>
-					<div className={clsx('pt-5')}>
-						<div className={clsx('flex', 'justify-end', 'gap-3')}>
-							<Button
-								text={t('CANCEL')}
-								variant="subtle"
-							/>
-							<Button
-								text={t('SUBMIT')}
-								variant="primary"
-							/>
-						</div>
-					</div>
+					<ProfileForm />
 				</div>
 			</div>
 		</div>

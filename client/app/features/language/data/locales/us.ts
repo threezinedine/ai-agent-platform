@@ -4,6 +4,7 @@ const locale = {
 	REGISTER: 'Register',
 	USERNAME: 'Username',
 	EMAIL: 'Email',
+	FULL_NAME: 'Full Name',
 	PASSWORD: 'Password',
 	ENTER_THIS_FIELD: 'Enter this field',
 	CONFIRM_PASSWORD: 'Confirm Password',
@@ -17,6 +18,8 @@ const locale = {
 
 	ENTER_THE_USERNAME: 'Enter the username',
 	ENTER_THE_EMAIL: 'Enter the email',
+	ENTER_THE_FULL_NAME: 'Enter the full name',
+	ENTER_THE_PHONE_NUMBER: 'Enter the phone number',
 	ENTER_THE_PASSWORD: 'Enter the password',
 	ENTER_THE_CONFIRM_PASSWORD: 'Enter the confirm password',
 

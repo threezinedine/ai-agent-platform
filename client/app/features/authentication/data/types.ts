@@ -1,9 +1,4 @@
-export interface UserInfo {
-	id: string;
-	username: string;
-	email: string;
-	fullName: string;
-}
+import { UserInfo } from '@/app/data/types';
 
 export interface LoginResponse {
 	accessToken: string;
