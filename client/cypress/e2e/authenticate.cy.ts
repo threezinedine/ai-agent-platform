@@ -36,7 +36,7 @@ describe('Testing Authentication Feature', () => {
 			'input[data-testid="confirm-password"]'
 		);
 		confirmPasswordInput.type(testUsername).blur();
-		cy.contains('Passwords do not match').should('be.visible');
+		cy.contains('Password does not match').should('be.visible');
 
 		confirmPasswordInput.clear().type(testPassword).blur();
 		cy.contains('Passwords do not match').should('not.exist');
