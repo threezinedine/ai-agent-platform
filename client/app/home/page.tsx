@@ -2,6 +2,8 @@
 
 import React, { useEffect } from 'react';
 import { useLang } from '@/app/features/language';
+import LoadingSpinner from '@/app/components/LoadingComponent/LoadingSpinner';
+import clsx from 'clsx';
 
 export default function Home() {
 	const { t } = useLang();
@@ -10,5 +12,9 @@ export default function Home() {
 		document.title = t('HOME');
 	});
 
-	<div>HOME</div>;
+	return (
+		<div className={clsx('h-10')}>
+			<LoadingSpinner />
+		</div>
+	);
 }

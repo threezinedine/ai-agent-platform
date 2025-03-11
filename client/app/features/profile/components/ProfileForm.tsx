@@ -25,7 +25,6 @@ export default function ProfileForm() {
 	return (
 		<LoadingComponent
 			state={state}
-			loading={<div>{t('LOADING')}</div>}
 			error={<div>{t('ERROR')}</div>}
 			loaded={
 				<>
