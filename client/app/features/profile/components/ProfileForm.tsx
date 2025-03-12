@@ -11,7 +11,7 @@ import LoadingComponent from '@/app/components/LoadingComponent';
 export default function ProfileForm() {
 	const { t } = useLang();
 	const formRef = useRef(null);
-	const { state, userInfo } = useAuth();
+	const { authState, userInfo } = useAuth();
 
 	function handleSubmit(data: { [key: string]: string }) {
 		console.log(data);
@@ -19,7 +19,7 @@ export default function ProfileForm() {
 
 	return (
 		<LoadingComponent
-			state={state}
+			state={authState}
 			error={<div>{t('ERROR')}</div>}
 			loaded={
 				<>

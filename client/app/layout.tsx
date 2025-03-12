@@ -14,7 +14,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const { changeLanguage } = useLang();
-	const { state, initialLoad } = useAuth();
+	const { authState, initialLoad } = useAuth();
 
 	useEffect(() => {
 		(async () => {
@@ -32,7 +32,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				<LoadingComponent
-					state={state}
+					state={authState}
 					loaded={<div>{children}</div>}
 					error={<div>{children}</div>}
 				/>

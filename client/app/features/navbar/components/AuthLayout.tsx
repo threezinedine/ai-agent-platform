@@ -12,15 +12,15 @@ export default function AuthLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const { state, isAuthenticated, useLogout } = useAuth();
+	const { authState, isAuthenticated, useLogout } = useAuth();
 	const router = useRouter();
 
 	useEffect(() => {
-		if (state !== 'loading' && !isAuthenticated && !useLogout) {
+		if (authState !== 'loading' && !isAuthenticated && !useLogout) {
 			router.push('/login');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [state, isAuthenticated]);
+	}, [authState, isAuthenticated]);
 
 	return (
 		<div>

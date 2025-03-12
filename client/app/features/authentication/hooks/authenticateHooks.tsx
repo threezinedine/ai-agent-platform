@@ -8,7 +8,7 @@ import { create } from 'zustand';
 import { LoadingComponentState } from '@/app/components/LoadingComponent';
 
 interface ProfileState {
-	state: LoadingComponentState;
+	authState: LoadingComponentState;
 	isAuthenticated?: boolean;
 	useLogout?: boolean;
 	userInfo: UserInfo;
@@ -22,7 +22,7 @@ interface ProfileState {
 const authenRequest = new AuthenRequest();
 
 const useAuth = create<ProfileState>((set) => ({
-	state: 'loading',
+	authState: 'loading',
 	isAuthenticated: false,
 	userInfo: {
 		id: '',
@@ -33,43 +33,43 @@ const useAuth = create<ProfileState>((set) => ({
 	avatar: '',
 	useLogout: false,
 	reloadAvatar: async () => {
-		set({ state: 'loading' });
+		set({ authState: 'loading' });
 		const response = await authenRequest.getAvatar();
 		if (response.isSuccess()) {
 			set({
 				avatar: response.getData() || '',
-				state: 'loaded',
+				authState: 'loaded',
 				isAuthenticated: true,
 			});
 		} else {
-			set({ state: 'error', isAuthenticated: false });
+			set({ authState: 'error', isAuthenticated: false });
 		}
 	},
 	reloadUserInfo: async () => {
-		set({ state: 'loading' });
+		set({ authState: 'loading' });
 
 		const repsonse = await authenRequest.verifyToken();
 
 		if (repsonse.isSuccess()) {
 			set({
 				userInfo: repsonse.getData() as UserInfo,
-				state: 'loaded',
+				authState: 'loaded',
 				isAuthenticated: true,
 			});
 		} else {
-			set({ state: 'error', isAuthenticated: false });
+			set({ authState: 'error', isAuthenticated: false });
 		}
 	},
 	logout: async () => {
-		set({ state: 'loading', useLogout: true });
+		set({ authState: 'loading', useLogout: true });
 		await Storage.RemoveItem(constants.ACCESS_TOKEN_KEY);
 		set({
-			state: 'loaded',
+			authState: 'loaded',
 			isAuthenticated: false,
 		});
 	},
 	initialLoad: async () => {
-		set({ state: 'loading', useLogout: false });
+		set({ authState: 'loading', useLogout: false });
 
 		const verifyResponse = await authenRequest.verifyToken();
 		const avatarResponse = await authenRequest.getAvatar();
@@ -79,10 +79,10 @@ const useAuth = create<ProfileState>((set) => ({
 				isAuthenticated: true,
 				userInfo: verifyResponse.getData() as UserInfo,
 				avatar: avatarResponse.getData() || '',
-				state: 'loaded',
+				authState: 'loaded',
 			});
 		} else {
-			set({ state: 'error', isAuthenticated: false });
+			set({ authState: 'error', isAuthenticated: false });
 		}
 	},
 }));

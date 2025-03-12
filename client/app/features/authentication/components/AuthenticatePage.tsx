@@ -13,11 +13,11 @@ export default function AuthenticatePage({
 	children,
 	unauthorizedNode = null,
 }: AuthenticatePageProps) {
-	const { state, isAuthenticated } = useAuth();
+	const { authState, isAuthenticated } = useAuth();
 
 	return (
 		<LoadingComponent
-			state={state}
+			state={authState}
 			loaded={isAuthenticated ? children : unauthorizedNode}
 		/>
 	);

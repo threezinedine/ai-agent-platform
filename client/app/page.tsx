@@ -6,13 +6,13 @@ import { useAuth } from '@/app/features/authentication';
 
 export default function Home() {
 	const router = useRouter();
-	const { state } = useAuth();
+	const { authState } = useAuth();
 
 	useEffect(() => {
-		if (state === 'loaded') {
+		if (authState === 'loaded') {
 			router.push('/home');
 		}
-	}, [state, router]);
+	}, [authState, router]);
 
 	return <div>Navigating</div>;
 }
