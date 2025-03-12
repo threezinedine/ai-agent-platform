@@ -10,10 +10,12 @@ import { ToastService } from '@/app/features/toast';
 import Button from '@/app/components/Button';
 import * as constants from '../data/constants';
 import { useLang } from '@/app/features/language';
+import useAuth from '../hooks/authenticateHooks';
 
 export default function LoginForm() {
 	const authenRequest = new AuthenRequest();
 	const router = useRouter();
+	const { initialLoad } = useAuth();
 	const { t } = useLang();
 
 	async function handleSubmit(data: { [key: string]: string }) {
@@ -27,9 +29,10 @@ export default function LoginForm() {
 					response.getData()?.accessToken
 				);
 				Storage.SetItem(
-					'refreshToken',
+					constants.REFRESH_TOKEN_KEY,
 					response.getData()?.refreshToken
 				);
+				await initialLoad();
 				router.push('/dashboard');
 				ToastService.getInstance().addToastMessage({
 					message: t('LOGIN_SUCCESSFULLY'),

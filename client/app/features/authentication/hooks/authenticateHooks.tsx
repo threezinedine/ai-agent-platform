@@ -10,12 +10,13 @@ import { LoadingComponentState } from '@/app/components/LoadingComponent';
 interface ProfileState {
 	state: LoadingComponentState;
 	isAuthenticated?: boolean;
+	useLogout?: boolean;
 	userInfo: UserInfo;
 	avatar: string;
 	reloadAvatar: () => void;
-	logout: () => void;
 	reloadUserInfo: () => void;
 	initialLoad: () => void;
+	logout: () => void;
 }
 
 const authenRequest = new AuthenRequest();
@@ -30,6 +31,7 @@ const useAuth = create<ProfileState>((set) => ({
 		fullName: '',
 	},
 	avatar: '',
+	useLogout: false,
 	reloadAvatar: async () => {
 		set({ state: 'loading' });
 		const response = await authenRequest.getAvatar();
@@ -59,12 +61,15 @@ const useAuth = create<ProfileState>((set) => ({
 		}
 	},
 	logout: async () => {
-		set({ state: 'loading' });
+		set({ state: 'loading', useLogout: true });
 		await Storage.RemoveItem(constants.ACCESS_TOKEN_KEY);
-		set({ state: 'loaded', isAuthenticated: false });
+		set({
+			state: 'loaded',
+			isAuthenticated: false,
+		});
 	},
 	initialLoad: async () => {
-		set({ state: 'loading' });
+		set({ state: 'loading', useLogout: false });
 
 		const verifyResponse = await authenRequest.verifyToken();
 		const avatarResponse = await authenRequest.getAvatar();

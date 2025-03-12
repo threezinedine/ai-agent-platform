@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { languageConstants, useLang } from '@/app/features/language';
 import Storage from '@/app/utils/storage';
 import { useAuth } from '@/app/features/authentication';
+import LoadingComponent from './components/LoadingComponent';
 
 export default function RootLayout({
 	children,
@@ -13,7 +14,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const { changeLanguage } = useLang();
-	const { initialLoad } = useAuth();
+	const { state, initialLoad } = useAuth();
 
 	useEffect(() => {
 		(async () => {
@@ -30,7 +31,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<div>{children}</div>
+				<LoadingComponent
+					state={state}
+					loaded={<div>{children}</div>}
+					error={<div>{children}</div>}
+				/>
 				<Toast />
 			</body>
 		</html>

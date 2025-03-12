@@ -23,7 +23,7 @@ export default function AuthNavbar() {
 		logout();
 		router.push('/');
 		ToastService.getInstance().addToastMessage({
-			message: t('LOG_OUT_SUCCESSFULLY'),
+			message: t('LOGOUT_SUCCESSFULLY'),
 			type: 'success',
 			duration: 1000,
 		});
